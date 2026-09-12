@@ -98,6 +98,19 @@ python3 eval_robot_proxy.py
 
 This eval run is significantly slower than M1's (roughly 6/4 more conditions × 2 ASR decodes instead of 1) — budget well over an hour of mostly-CPU-bound (DNSMOS) + some GPU (model + 2×ASR decode) time.
 
+## 9. Checkpoint SHA256 hashes (verify against `hf download banhchungtuongot/ulunas-robot-proxy-poc`)
+
+```
+11a20e25b06c446b2e205b10c3778a658480c0622b229a8c3b82c8949e320fb5  F_GENERIC.tar
+b9c0621e91e1094a2e366f53228fb2b24340f00dba19a32bdfe34b0b22d494e8  F_GENERIC_ASR.tar
+70c2a7d26af6d11d701cd683fd67b07d1979fc0dbe2f77434851a5d9b4aa8c29  F_PROXY_ROBOT.tar
+5394d0c012e500b37d4c2076cf5b847d9db07348c135bd15deb3f6904fa0167e  F_PROXY_ROBOT_best.tar
+36d523c1647dda9ca8f81b3cfc4819bc1694b9776a0688fa1dd356be5c3e5b3c  F_PROXY_ROBOT_ASR.tar
+0f9f23f7c752c5139cddfc38bc3dae57de56d33f49c10dc0e4a403801ec6ded4  F_PROXY_ROBOT_ASR_best.tar
+```
+
+These are the exact checkpoints produced and uploaded in this session (computed via `sha256sum`, not re-derived) — training is not bit-exact-reproducible run-to-run (GPU float non-determinism, unseeded `DataLoader` workers), so a fresh training run will produce *equivalent* but not *hash-identical* checkpoints. Use these hashes only to verify you have the exact same uploaded files, not to validate a fresh retrain.
+
 ## Known gaps / things a fresh run should watch for
 
 - QUT-NOISE download will fail with HTTP 403 (server-side block, not a code bug) — DEMAND alone is used.
