@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UL-UNAS WASM Fallback Demo</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+  .warn { background: #fff3cd; border: 1px solid #ffe69c; padding: 0.75rem; border-radius: 6px; margin: 1rem 0; }
+  .bad { background: #f8d7da; border: 1px solid #f1aeb5; padding: 0.75rem; border-radius: 6px; margin: 1rem 0; }
+  button { font-size: 1.1rem; padding: 0.5rem 1.2rem; margin-right: 0.5rem; }
+  #stats { font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: pre; background: #f5f5f5; padding: 0.75rem; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>UL-UNAS -- WASM Fallback Demo</h1>
+
+<div class="bad">
+  <strong>This is NOT a native-performance demo.</strong> It runs the streaming STFT/ISTFT
+  DSP core compiled to WebAssembly, in a browser, as a fallback for when no Mac/Xcode/physical
+  iPhone is available to build the real iOS app (see <code>IOS_BUILD_AND_DEMO.md</code>). It
+  does <strong>not</strong> demonstrate native ARM64/NEON performance, and it does
+  <strong>not yet include the actual noise-suppression model</strong> -- see the note below.
+</div>
+
+<div class="warn">
+  <strong>No echo cancellation.</strong> Use wired headphones. Playing this page's output
+  through your device's speaker while the microphone is open will cause audio feedback.
+</div>
+
+<div class="warn" id="modelNote">
+  <strong>Model status:</strong> this build runs the real, validated STFT &rarr; overlap-add
+  ISTFT streaming pipeline with an <em>identity passthrough</em> in place of the noise-suppression
+  model (the runtime-free C model implementation was still being completed in a concurrent
+  workstream at the time this demo was built -- see <code>ulunas_wasm.cpp</code>). You will hear
+  your own voice with the DSP framing latency applied, not noise suppression yet.
+</div>
+
+<button id="startBtn">Start</button>
+<button id="stopBtn" disabled>Stop</button>
+
+<h3>Stats</h3>
+<div id="stats">not started</div>
+
+<script src="ulunas_wasm.js"></script>
+<script>
+const HOP = 256;
+const MODEL_SR = 16000;
+
+let audioCtx, sourceNode, processorNode, mediaStream;
+let wasmModule, resetFn, processHopFn, inPtr, outPtr;
+let hopCount = 0, startTime = 0;
+let inResampleBuf = [];
+
+async function initWasm() {
+  wasmModule = await UlunasWasmModule();
+  resetFn = wasmModule.cwrap('ulunas_wasm_reset', null, []);
+  processHopFn = wasmModule.cwrap('ulunas_wasm_process_hop', null, ['number', 'number']);
+  inPtr = wasmModule._malloc(HOP * 4);
+  outPtr = wasmModule._malloc(HOP * 4);
+  resetFn();
+}
+
+async function start() {
+  document.getElementById('startBtn').disabled = true;
+  await initWasm();
+
+  mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1 } });
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  sourceNode = audioCtx.createMediaStreamSource(mediaStream);
+
+  // ScriptProcessorNode is deprecated in favor of AudioWorklet, but is used here deliberately:
+  // it runs on the main thread where the already-verified Emscripten glue/module (tested above
+  // under Node) can be called directly, without re-deriving a raw-WASM-in-AudioWorklet
+  // instantiation this demo has no real browser to test. Documented tradeoff, not an oversight
+  // -- see web_demo/README.md.
+  const bufferSize = 2048;
+  processorNode = audioCtx.createScriptProcessor(bufferSize, 1, 1);
+
+  document.getElementById('stats').textContent =
+    `AudioContext sample rate: ${audioCtx.sampleRate} Hz (model expects ${MODEL_SR} Hz -- ` +
+    `naive linear resampling applied below; a production build should use a proper polyphase ` +
+    `resampler, e.g. via OfflineAudioContext or a WASM-side resampler)`;
+
+  startTime = performance.now();
+  hopCount = 0;
+  const inFloat = new Float32Array(HOP);
+  const resampleRatio = MODEL_SR / audioCtx.sampleRate;
+
+  processorNode.onaudioprocess = (event) => {
+    const input = event.inputBuffer.getChannelData(0);
+    const output = event.outputBuffer.getChannelData(0);
+
+    // naive nearest-neighbor resample to 16kHz for the model, then back for playback --
+    // adequate for a fallback demo, NOT the quality-preserving resampler a shipped app needs.
+    for (let i = 0; i < input.length; i++) inResampleBuf.push(input[i]);
+
+    let outWritten = 0;
+    while (inResampleBuf.length >= HOP / resampleRatio) {
+      for (let i = 0; i < HOP; i++) {
+        const srcIdx = Math.floor(i / resampleRatio);
+        inFloat[i] = inResampleBuf[srcIdx] || 0;
+      }
+      inResampleBuf.splice(0, Math.floor(HOP / resampleRatio));
+
+      wasmModule.HEAPF32.set(inFloat, inPtr / 4);
+      processHopFn(inPtr, outPtr);
+      const outHop = new Float32Array(wasmModule.HEAPF32.buffer, outPtr, HOP);
+
+      for (let i = 0; i < output.length - outWritten && i < outHop.length / resampleRatio; i++) {
+        const srcIdx = Math.floor(i * resampleRatio);
+        output[outWritten + i] = outHop[srcIdx] || 0;
+      }
+      outWritten += Math.floor(outHop.length / resampleRatio);
+      hopCount++;
+    }
+    for (let i = outWritten; i < output.length; i++) output[i] = 0;
+
+    const elapsedS = (performance.now() - startTime) / 1000;
+    document.getElementById('stats').textContent =
+      `hops processed: ${hopCount}\n` +
+      `elapsed: ${elapsedS.toFixed(1)}s\n` +
+      `NOTE: this is a WASM/browser fallback -- do not treat any timing here as a native ` +
+      `ARM64/NEON iPhone benchmark. See IOS_BUILD_AND_DEMO.md for the real protocol.`;
+  };
+
+  sourceNode.connect(processorNode);
+  processorNode.connect(audioCtx.destination);
+
+  document.getElementById('stopBtn').disabled = false;
+}
+
+function stop() {
+  if (processorNode) { processorNode.disconnect(); processorNode.onaudioprocess = null; }
+  if (sourceNode) sourceNode.disconnect();
+  if (mediaStream) mediaStream.getTracks().forEach(t => t.stop());
+  if (audioCtx) audioCtx.close();
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+}
+
+document.getElementById('startBtn').addEventListener('click', start);
+document.getElementById('stopBtn').addEventListener('click', stop);
+</script>
+</body>
+</html>

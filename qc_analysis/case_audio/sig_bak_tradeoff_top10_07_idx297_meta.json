@@ -1,0 +1,16 @@
+{
+  "idx": 297,
+  "wer": 0.09090909090909091,
+  "sig": 2.7364218343188704,
+  "bak": 3.911937257232898,
+  "ovrl": 2.4872395707910577,
+  "delta_sig_vs_N0": -0.06939087667311128,
+  "delta_bak_vs_N0": 2.3833989873541817,
+  "snr_db": 3.7100306910086456,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170142-0000",
+  "transcript": "THE LAST TWO DAYS OF THE VOYAGE BARTLEY FOUND ALMOST INTOLERABLE",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

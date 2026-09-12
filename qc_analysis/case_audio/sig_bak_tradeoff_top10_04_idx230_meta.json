@@ -1,0 +1,16 @@
+{
+  "idx": 230,
+  "wer": 0.11764705882352941,
+  "sig": 2.295057287268044,
+  "bak": 3.7147226684693573,
+  "ovrl": 2.0420905589663074,
+  "delta_sig_vs_N0": -0.4070044748552659,
+  "delta_bak_vs_N0": 2.1595475111857865,
+  "snr_db": 0.24615069656650768,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "2277-149896-0020",
+  "transcript": "THEN HE SAT DOWN IN HIS CHAIR AND GAZED WITHOUT SEEING CONTEMPLATING THE RESULT OF HIS WORK",
+  "distance_m": 1.0,
+  "angle_deg": 45
+}

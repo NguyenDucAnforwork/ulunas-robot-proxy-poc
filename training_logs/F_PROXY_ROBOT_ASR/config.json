@@ -1,0 +1,12 @@
+{
+  "variant": "se_asr",
+  "total_steps": 18000,
+  "batch_size": 8,
+  "segment_seconds": 4.0,
+  "seed": 43,
+  "lr": 1e-05,
+  "pretrained_ckpt": "/content/repos/ul-unas/checkpoints/model_trained_on_dns3.tar",
+  "speech_manifest_hash": "29b3277c8f498345",
+  "noise_manifest_hash": "f99e67736c07fa44",
+  "config_hash": "e6fa726b68864d9c"
+}

@@ -1,0 +1,16 @@
+{
+  "idx": 398,
+  "wer": 0.0,
+  "sig": 3.1066230152208028,
+  "bak": 4.037907654341576,
+  "ovrl": 2.6981876688156112,
+  "delta_sig_vs_N0": 0.36782471914545756,
+  "delta_bak_vs_N0": 1.10584154646175,
+  "snr_db": 11.518966414596441,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "3081-166546-0038",
+  "transcript": "SHE HAD NO COMPANION NEAR HER",
+  "distance_m": 2.0,
+  "angle_deg": 180
+}

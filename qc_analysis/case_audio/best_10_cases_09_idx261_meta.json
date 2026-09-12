@@ -1,0 +1,16 @@
+{
+  "idx": 261,
+  "wer": 0.0,
+  "sig": 3.3480697504188655,
+  "bak": 4.1069361548469425,
+  "ovrl": 3.079285705709611,
+  "delta_sig_vs_N0": 0.029908432660006312,
+  "delta_bak_vs_N0": 0.8404631501234072,
+  "snr_db": 5.6077843643252905,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "2277-149897-0015",
+  "transcript": "IN ABOUT AN HOUR AND THREE QUARTERS THE BOY RETURNED",
+  "distance_m": 1.0,
+  "angle_deg": 90
+}

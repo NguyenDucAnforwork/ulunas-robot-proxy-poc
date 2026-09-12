@@ -1,0 +1,16 @@
+{
+  "idx": 407,
+  "wer": 0.0,
+  "sig": 3.223993967199994,
+  "bak": 4.065264094121923,
+  "ovrl": 2.8945229566540953,
+  "delta_sig_vs_N0": 0.04541573201635263,
+  "delta_bak_vs_N0": 0.7357505892553209,
+  "snr_db": 6.3800084231403105,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "3081-166546-0013",
+  "transcript": "I INQUIRED OF GEORGE WITH MY EYES STILL ON THIS FURTIVE WATCHER",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

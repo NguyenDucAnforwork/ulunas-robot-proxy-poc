@@ -1,0 +1,16 @@
+{
+  "idx": 546,
+  "wer": 0.25,
+  "sig": 2.6311533473533344,
+  "bak": 3.933806705702291,
+  "ovrl": 2.41847669023284,
+  "delta_sig_vs_N0": -0.1580781515709524,
+  "delta_bak_vs_N0": 2.2826952785336685,
+  "snr_db": 0.04766716938795046,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "2428-83705-0008",
+  "transcript": "I GASPED POSITIVELY GASPED",
+  "distance_m": 1.0,
+  "angle_deg": 0
+}

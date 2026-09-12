@@ -1,0 +1,16 @@
+{
+  "idx": 380,
+  "wer": 0.3333333333333333,
+  "sig": 2.5722777755532613,
+  "bak": 3.9142575906450627,
+  "ovrl": 2.329219822893947,
+  "delta_sig_vs_N0": -0.33656605834192854,
+  "delta_bak_vs_N0": 2.4686749318394945,
+  "snr_db": -0.570023946685037,
+  "noise_source": "procedural",
+  "robot_state": "fan",
+  "utt_id": "1462-170145-0011",
+  "transcript": "I THINK I HAVE FELT THAT YOU WERE COMING",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

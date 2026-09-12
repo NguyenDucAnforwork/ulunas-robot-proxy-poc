@@ -1,0 +1,105 @@
+# REPRODUCTION.md — M1 (generic) + robot-proxy training/evaluation
+
+Environment used: Linux, 1× NVIDIA A100-SXM4-80GB, CUDA 13.0, Python 3.13. Dependency versions pinned in `requirements_pinned.txt` (captured via `pip freeze` after installation — exact versions actually used this run, not a hand-written wishlist).
+
+## 1. Get the reference repos and checkpoint
+
+```bash
+git clone --depth 1 https://github.com/Xiaobin-Rong/ul-unas.git
+git clone --depth 1 https://github.com/Xiaobin-Rong/SEtrain.git
+```
+
+## 2. Adapt SEtrain (already done under `SEtrain_adapted/`)
+
+```bash
+cp -r SEtrain/* SEtrain_adapted/
+cp ul-unas/ulunas.py SEtrain_adapted/models/ulunas.py
+```
+Then the new files in `SEtrain_adapted/` (`generic_dataset.py`, `asr_loss.py`, `dnsmos_onnxruntime.py`, `train_generic.py`, `eval_generic.py`, `split_manifest.py`) replace/extend the template's `train.py`/`dataloader.py`/`evaluate.py`.
+
+## 3. Get the data (see `data/manifests/data_manifest.csv` for exact URLs/hashes/license verification dates)
+
+```bash
+wget https://www.openslr.org/resources/12/dev-clean.tar.gz            # LibriSpeech, CC BY 4.0
+wget https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz  # CC BY 4.0
+# DEMAND: 12 environments at 16kHz, e.g.
+wget "https://zenodo.org/records/1227121/files/DKITCHEN_16k.zip?download=1"
+# ... (11 more environments, see data_manifest.csv for the full list)
+```
+Extract, then generate the split manifests (no leakage — verified by an assertion in the script itself):
+```bash
+cd SEtrain_adapted && python3 split_manifest.py
+```
+
+## 4. Fine-tune
+
+```bash
+# benchmark first (300-500 steps) to size the run to your time budget
+python3 train_generic.py --variant se_only --steps 400 --benchmark --out_tag bench_se_only
+python3 train_generic.py --variant se_asr  --steps 400 --benchmark --out_tag bench_se_asr
+
+# full runs (same step count for both, per the plan's controlled-comparison requirement)
+python3 train_generic.py --variant se_only --steps 18000 --out_tag F_GENERIC
+python3 train_generic.py --variant se_asr  --steps 18000 --out_tag F_GENERIC_ASR
+```
+`lambda_asr` for the ASR-loss run is computed automatically via a gradient-scale probe on the first batch (see `training_logs/F_GENERIC_ASR/lambda_probe.json`) unless passed explicitly with `--lambda_asr`.
+
+## 5. Evaluate
+
+```bash
+python3 eval_generic.py
+```
+Produces `evaluation/evaluation_results.{json,csv}`, `evaluation/evaluation_raw_per_utterance.json` (per-utterance values, for any further statistical analysis), and 10 audio comparison sets under `audio_samples/`. This step is CPU-bound (DNSMOS) and took roughly 15-20 minutes on this machine for 563+300 test utterances × 4 conditions when nothing else was competing for CPU cores.
+
+## 6. Mobile / ONNX export (M4, done for the fine-tuned checkpoint)
+
+```bash
+cd mobile/onnx_export && python3 export_finetuned_stream.py   # exports ONNX + runs parity check
+cd mobile/android_ref/build_arm64
+cmake -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24 ..
+make
+```
+
+## 7. Runtime-free C kernels (M5, partial — see `MOBILE_BENCHMARK.md` for exact status)
+
+```bash
+cd mobile/c_neon && python3 export_weights.py   # dumps checkpoint to a C header
+cd build && gcc -O2 -std=c99 -I../src ../src/test_block0.c -lm -o test_block0 && ./test_block0
+# (test_block1.c, test_block2.c, test_dpgrnn.c, test_decoder4.c similarly)
+```
+
+## 8. Robot-proxy data + training + evaluation (see `ROBOT_PROXY_DATA.md`, `DATA_LICENSES.md` for full detail)
+
+```bash
+# public UAV ego-noise (KU Leuven, CC-BY-NC-SA-4.0 -- NonCommercial, see DATA_LICENSES.md)
+# NOTE: the DOI in some briefs (10.48804/TLUJBE) 404s -- use 10.48804/PZAVUC, verified working
+curl -sL "https://rdr.kuleuven.be/api/access/datafile/706" -o RPM4000_Channel_01.wav  # train
+curl -sL "https://rdr.kuleuven.be/api/access/datafile/702" -o RPM5000_Channel_01.wav  # val
+curl -sL "https://rdr.kuleuven.be/api/access/datafile/699" -o RPM6000_Channel_01.wav  # test
+# (resample to 16kHz; see build_robot_proxy_manifest.py)
+
+# procedural mechanical noise (fully synthetic, seeded, reproducible)
+python3 procedural_noise.py
+
+# combined manifest (50% generic / 35% UAV / 15% procedural BY SAMPLING WEIGHT, not duration --
+# see ROBOT_PROXY_DATA.md §2 for why)
+python3 build_robot_proxy_manifest.py
+
+# train (same checkpoint/seed/optimizer/steps as F_GENERIC, only noise pool + loss differ)
+python3 train_robot_proxy.py --variant se_only --steps 18000 --out_tag F_PROXY_ROBOT
+python3 train_robot_proxy.py --variant se_asr  --steps 18000 --out_tag F_PROXY_ROBOT_ASR
+
+# full 6-condition evaluation (N0/P0/F_GENERIC/F_GENERIC_ASR/F_PROXY_ROBOT/F_PROXY_ROBOT_ASR)
+# on a NEW robot-proxy-domain test set -- this re-evaluates F_GENERIC/F_GENERIC_ASR too, since
+# they were never tested on this domain in M1. Adds whisper-tiny.en as a second ASR (WER
+# generalization check) alongside the primary wav2vec2-base-960h.
+python3 eval_robot_proxy.py
+```
+
+This eval run is significantly slower than M1's (roughly 6/4 more conditions × 2 ASR decodes instead of 1) — budget well over an hour of mostly-CPU-bound (DNSMOS) + some GPU (model + 2×ASR decode) time.
+
+## Known gaps / things a fresh run should watch for
+
+- QUT-NOISE download will fail with HTTP 403 (server-side block, not a code bug) — DEMAND alone is used.
+- CUDA-based DNSMOS silently falls back to CPU on this environment (missing `libcublasLt.so.13` for the installed onnxruntime-gpu/CUDA version pairing) — this is why evaluation is CPU-bound; not a correctness issue, just slower than it could be.
+- `eval_generic.py`'s JSON writes use `default=lambda o: float(o)` as a safety net for stray numpy scalar types — if you see a `TypeError: Object of type ... is not JSON serializable` again, that's the place to look first (it happened once during this project, after ~90 minutes of otherwise-successful computation, from `si_sdr()`/`stoi()` returning numpy floats).

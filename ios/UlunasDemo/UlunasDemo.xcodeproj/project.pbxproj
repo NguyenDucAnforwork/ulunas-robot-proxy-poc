@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		208695061E8347CBAEAEA936 /* UlunasDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110DDDEAAF74224BA6D8011 /* UlunasDemoApp.swift */; };
+		683F3172377E44E7A5A7F39B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A96FC6380FE4066B3050386 /* ContentView.swift */; };
+		1AC9B4A29C544A2CA78C7BEF /* AudioEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AC92E15B5943A39091D794 /* AudioEngineManager.swift */; };
+		506F6AAAE013498983FB0E00 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BACCB78BA6496E93A5D957 /* RingBuffer.swift */; };
+		61B53E360AD84C3F90C4D41F /* WavRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4FB65A5EA487D986FA2EB /* WavRecorder.swift */; };
+		F2DDFD838E3345F5B6BF0978 /* UlunasBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 11CEDABB40FC449F82421ED0 /* UlunasBridge.mm */; };
+		104C357181B34958906332F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B164262AA521436CB7AE4EA6 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		592E220EB2314089B31D4864 /* UlunasDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UlunasDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F110DDDEAAF74224BA6D8011 /* UlunasDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UlunasDemoApp.swift; sourceTree = "<group>"; };
+		7A96FC6380FE4066B3050386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		94AC92E15B5943A39091D794 /* AudioEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineManager.swift; sourceTree = "<group>"; };
+		C8BACCB78BA6496E93A5D957 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
+		2DC4FB65A5EA487D986FA2EB /* WavRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavRecorder.swift; sourceTree = "<group>"; };
+		CBB85C434BE243EEA38750A5 /* UlunasBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UlunasBridge.h; sourceTree = "<group>"; };
+		11CEDABB40FC449F82421ED0 /* UlunasBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UlunasBridge.mm; sourceTree = "<group>"; };
+		39C64F5C6B4C46B089C70919 /* UlunasDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UlunasDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		E8C585322F294B63B2463503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B164262AA521436CB7AE4EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB6E33A40D58475E8EC97779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				104C357181B34958906332F8 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A508AD3D7DB04B26B0FF89EE = {
+			isa = PBXGroup;
+			children = (
+				52CBE66FB2094B89B359C26F /* Sources */,
+				B0B84EAC5D8D4C8691E889C2 /* Bridge */,
+				FA60257362194FDB945AC835 /* Resources */,
+				93408D98352643CF9CE8D60C /* Frameworks */,
+				44474CA99F14480294890479 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		52CBE66FB2094B89B359C26F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F110DDDEAAF74224BA6D8011 /* UlunasDemoApp.swift */,
+				7A96FC6380FE4066B3050386 /* ContentView.swift */,
+				94AC92E15B5943A39091D794 /* AudioEngineManager.swift */,
+				C8BACCB78BA6496E93A5D957 /* RingBuffer.swift */,
+				2DC4FB65A5EA487D986FA2EB /* WavRecorder.swift */,
+			);
+			path = UlunasDemo;
+			sourceTree = "<group>";
+		};
+		B0B84EAC5D8D4C8691E889C2 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				CBB85C434BE243EEA38750A5 /* UlunasBridge.h */,
+				11CEDABB40FC449F82421ED0 /* UlunasBridge.mm */,
+				39C64F5C6B4C46B089C70919 /* UlunasDemo-Bridging-Header.h */,
+			);
+			path = UlunasDemo/Bridge;
+			sourceTree = "<group>";
+		};
+		FA60257362194FDB945AC835 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E8C585322F294B63B2463503 /* Info.plist */,
+			);
+			path = UlunasDemo/Resources;
+			sourceTree = "<group>";
+		};
+		93408D98352643CF9CE8D60C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B164262AA521436CB7AE4EA6 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44474CA99F14480294890479 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				592E220EB2314089B31D4864 /* UlunasDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		970F9FA450E4464AA402998F /* UlunasDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 560C1DDDF40C48D784D88DEA /* Build configuration list for PBXNativeTarget "UlunasDemo" */;
+			buildPhases = (
+				96E5619DA7FF4C8CAC752882 /* Sources */,
+				FB6E33A40D58475E8EC97779 /* Frameworks */,
+				968FF2D7F1694E0D98A8492C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UlunasDemo;
+			productName = UlunasDemo;
+			productReference = 592E220EB2314089B31D4864 /* UlunasDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F54FC3FEBDB247089912964D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					970F9FA450E4464AA402998F = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 0D737B079DDD48C3BF1ECA05 /* Build configuration list for PBXProject "UlunasDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A508AD3D7DB04B26B0FF89EE;
+			productRefGroup = 44474CA99F14480294890479 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				970F9FA450E4464AA402998F /* UlunasDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		968FF2D7F1694E0D98A8492C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96E5619DA7FF4C8CAC752882 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				208695061E8347CBAEAEA936 /* UlunasDemoApp.swift in Sources */,
+				683F3172377E44E7A5A7F39B /* ContentView.swift in Sources */,
+				1AC9B4A29C544A2CA78C7BEF /* AudioEngineManager.swift in Sources */,
+				506F6AAAE013498983FB0E00 /* RingBuffer.swift in Sources */,
+				61B53E360AD84C3F90C4D41F /* WavRecorder.swift in Sources */,
+				F2DDFD838E3345F5B6BF0978 /* UlunasBridge.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C9207EE0E62F4037BAA881B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				ARCHS = arm64;
+				VALID_ARCHS = arm64;
+				ENABLE_BITCODE = NO;
+			};
+			name = Debug;
+		};
+		F438D9291669459584FF4814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+				ARCHS = arm64;
+				VALID_ARCHS = arm64;
+				ENABLE_BITCODE = NO;
+			};
+			name = Release;
+		};
+		554DAA6D458D49ED93B05458 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UlunasDemo/Resources/Info.plist;
+				SWIFT_OBJC_BRIDGING_HEADER = "UlunasDemo/Bridge/UlunasDemo-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../mobile/c_neon/include",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.UlunasDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1";
+				// The runtime-free C engine's implementation .c files (from
+				// mobile/c_neon/, produced by the parallel graph-completion workstream)
+				// must be added to this target's Compile Sources build phase, and
+				// mobile/c_neon/generated/ + mobile/c_neon/src/ added to
+				// HEADER_SEARCH_PATHS, once that implementation lands -- see
+				// IOS_BUILD_AND_DEMO.md step 2 for the exact file list and instructions,
+				// since Xcode must be used to add them (this pbxproj was hand-written
+				// without a running Xcode to drive "Add Files to project").
+			};
+			name = Debug;
+		};
+		A218C6F1FB74434EBBED06A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UlunasDemo/Resources/Info.plist;
+				SWIFT_OBJC_BRIDGING_HEADER = "UlunasDemo/Bridge/UlunasDemo-Bridging-Header.h";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../mobile/c_neon/include",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.UlunasDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0D737B079DDD48C3BF1ECA05 /* Build configuration list for PBXProject "UlunasDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9207EE0E62F4037BAA881B9 /* Debug */,
+				F438D9291669459584FF4814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		560C1DDDF40C48D784D88DEA /* Build configuration list for PBXNativeTarget "UlunasDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				554DAA6D458D49ED93B05458 /* Debug */,
+				A218C6F1FB74434EBBED06A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F54FC3FEBDB247089912964D /* Project object */;
+}

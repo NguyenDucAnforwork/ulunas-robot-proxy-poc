@@ -1,0 +1,6 @@
+{
+  "lambda_asr": 0.09784502970139712,
+  "grad_norm_se": 8.29230785369873,
+  "grad_norm_asr_raw": 16.949880599975586,
+  "target_ratio": 0.2
+}

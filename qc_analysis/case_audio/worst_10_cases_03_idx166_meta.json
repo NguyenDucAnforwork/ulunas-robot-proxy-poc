@@ -1,0 +1,16 @@
+{
+  "idx": 166,
+  "wer": 0.7692307692307693,
+  "sig": 2.09082824845049,
+  "bak": 3.6029631982561496,
+  "ovrl": 1.8375647070585974,
+  "delta_sig_vs_N0": 0.8794510373515048,
+  "delta_bak_vs_N0": 2.470241942829638,
+  "snr_db": 0.48988818941414003,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "6313-66129-0022",
+  "transcript": "ALL AGREED THAT TAD'S SUPERIOR HORSEMANSHIP ALONE HAD WON THE RACE FOR HIM",
+  "distance_m": 0.5,
+  "angle_deg": 90
+}

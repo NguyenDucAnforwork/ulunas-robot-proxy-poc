@@ -1,0 +1,16 @@
+{
+  "idx": 295,
+  "wer": 0.0,
+  "sig": 3.6284074308786103,
+  "bak": 3.9779997199773973,
+  "ovrl": 3.29649853971678,
+  "delta_sig_vs_N0": -0.13064553428707804,
+  "delta_bak_vs_N0": -0.008388284931120094,
+  "snr_db": 8.185860835564336,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "1462-170142-0015",
+  "transcript": "IT'S UNBEARABLE IT TORTURES ME EVERY MINUTE",
+  "distance_m": 1.0,
+  "angle_deg": 90
+}

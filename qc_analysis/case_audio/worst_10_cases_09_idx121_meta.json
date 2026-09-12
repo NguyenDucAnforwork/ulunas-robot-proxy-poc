@@ -1,0 +1,16 @@
+{
+  "idx": 121,
+  "wer": 0.6153846153846154,
+  "sig": 1.6415950771926127,
+  "bak": 3.544198390846509,
+  "ovrl": 1.521850287774107,
+  "delta_sig_vs_N0": 0.43370696010090515,
+  "delta_bak_vs_N0": 2.422693335483901,
+  "snr_db": -3.678398251644084,
+  "noise_source": "procedural",
+  "robot_state": "idle",
+  "utt_id": "6313-66125-0008",
+  "transcript": "MASTER TAD IS RIGHT DECIDED THE GUIDE GAZING AT THE TWO BOYS APPROVINGLY",
+  "distance_m": 2.0,
+  "angle_deg": 180
+}

@@ -1,0 +1,16 @@
+{
+  "idx": 364,
+  "wer": 0.8333333333333334,
+  "sig": 2.587923913268078,
+  "bak": 3.3889952992264156,
+  "ovrl": 2.132425330536435,
+  "delta_sig_vs_N0": -0.3340622357084664,
+  "delta_bak_vs_N0": 1.5064347912500073,
+  "snr_db": 0.9797203067185407,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "1462-170145-0010",
+  "transcript": "ALEXANDER SLIPPED HIS ARM ABOUT HER",
+  "distance_m": 1.0,
+  "angle_deg": 0
+}

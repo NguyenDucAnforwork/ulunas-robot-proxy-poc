@@ -1,0 +1,23 @@
+# Raw datasets (large, third-party licensed audio -- see data/manifests/ + DATA_LICENSES.md
+# for exact sources/hashes/licenses to re-download instead of vendoring here)
+data/
+
+# Downloaded toolchains/runtimes (large, reproducible via REPRODUCTION.md)
+mobile/android_ndk/
+mobile/ort_lib/
+
+# Compiled build artifacts (reproducible from source via REPRODUCTION.md / IOS_BUILD_AND_DEMO.md)
+mobile/c_neon/build/
+mobile/android_ref/build_arm64/
+mobile/android_ref/build_x86_host/
+
+# Model checkpoints -- uploaded to Hugging Face instead (see README for the repo link),
+# not duplicated here to keep the git repo lean.
+checkpoints/*.tar
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor cruft
+.DS_Store

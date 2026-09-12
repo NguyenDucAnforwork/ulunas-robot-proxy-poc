@@ -1,0 +1,11 @@
+{
+  "variant": "se_only",
+  "total_steps": 400,
+  "batch_size": 8,
+  "segment_seconds": 4.0,
+  "total_wall_clock_s": 34.52857947349548,
+  "steps_per_sec": 11.584606320310524,
+  "peak_vram_mb": 931.799552,
+  "lambda_asr": null,
+  "n_batchnorm_frozen": 22
+}

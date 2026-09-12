@@ -1,0 +1,16 @@
+{
+  "idx": 293,
+  "wer": 0.0,
+  "sig": 3.367014188683992,
+  "bak": 4.027436753849706,
+  "ovrl": 3.075817913227735,
+  "delta_sig_vs_N0": -0.35489373764754273,
+  "delta_bak_vs_N0": 1.0044776105762265,
+  "snr_db": 3.9720667563912606,
+  "noise_source": "procedural",
+  "robot_state": "motor_low",
+  "utt_id": "1462-170142-0004",
+  "transcript": "A COAL FIRE WAS CRACKLING IN THE GRATE AND THE LAMPS WERE LIT FOR IT WAS ALREADY BEGINNING TO GROW DARK OUTSIDE",
+  "distance_m": 1.0,
+  "angle_deg": 45
+}

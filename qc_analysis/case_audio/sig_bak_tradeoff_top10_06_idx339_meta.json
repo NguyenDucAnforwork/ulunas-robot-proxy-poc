@@ -1,0 +1,16 @@
+{
+  "idx": 339,
+  "wer": 0.21428571428571427,
+  "sig": 2.6953139779182873,
+  "bak": 3.920045869177396,
+  "ovrl": 2.4739454694725036,
+  "delta_sig_vs_N0": -0.7611351579429031,
+  "delta_bak_vs_N0": 1.6938324482449918,
+  "snr_db": 5.1136688359276565,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170138-0021",
+  "transcript": "HE BOWED AS THE WARNING BELL RANG AND MAINHALL WHISPERED YOU KNOW LORD WESTMERE OF COURSE THE STOOPED MAN WITH THE LONG GRAY MUSTACHE TALKING TO LADY DOWLE",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

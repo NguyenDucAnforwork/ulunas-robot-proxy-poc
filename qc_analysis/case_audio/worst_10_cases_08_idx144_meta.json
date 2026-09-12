@@ -1,0 +1,16 @@
+{
+  "idx": 144,
+  "wer": 0.625,
+  "sig": 2.485421795868531,
+  "bak": 3.8532683422166953,
+  "ovrl": 2.2848241459537237,
+  "delta_sig_vs_N0": 1.2854752817237893,
+  "delta_bak_vs_N0": 2.7657401658578435,
+  "snr_db": 5.066048117550126,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "6313-76958-0025",
+  "transcript": "A WRANGLER'S A WRANGLER ANSWERED BIG FOOT STOLIDLY",
+  "distance_m": 0.5,
+  "angle_deg": 90
+}

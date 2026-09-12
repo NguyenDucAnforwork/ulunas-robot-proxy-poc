@@ -1,0 +1,16 @@
+{
+  "idx": 294,
+  "wer": 0.0,
+  "sig": 3.0862067019074537,
+  "bak": 4.005454149391248,
+  "ovrl": 2.8198206726240183,
+  "delta_sig_vs_N0": -0.20218154400940458,
+  "delta_bak_vs_N0": 1.5130940214407582,
+  "snr_db": -1.6643371135233287,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "1462-170142-0031",
+  "transcript": "SHE LISTENED INTENTLY BUT SHE HEARD NOTHING BUT THE CREAKING OF HIS CHAIR",
+  "distance_m": 0.5,
+  "angle_deg": 180
+}

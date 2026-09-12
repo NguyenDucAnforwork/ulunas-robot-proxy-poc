@@ -1,0 +1,14 @@
+{
+  "variant": "se_only",
+  "total_steps": 18000,
+  "batch_size": 8,
+  "segment_seconds": 4.0,
+  "total_wall_clock_s": 1542.8782014846802,
+  "steps_per_sec": 11.666507429218306,
+  "peak_vram_mb": 936.559616,
+  "lambda_asr": null,
+  "n_batchnorm_frozen": 22,
+  "nan_inf_detected": false,
+  "best_val_se_loss": 0.8164002120494842,
+  "config_hash": "4b7a2c85f66e9dd6"
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "idx": 407,
+    "wer": 0.0,
+    "sig": 3.223993967199994,
+    "bak": 4.065264094121923,
+    "ovrl": 2.8945229566540953,
+    "delta_sig_vs_N0": 0.04541573201635263,
+    "delta_bak_vs_N0": 0.7357505892553209,
+    "snr_db": 6.3800084231403105,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  },
+  {
+    "idx": 295,
+    "wer": 0.0,
+    "sig": 3.6284074308786103,
+    "bak": 3.9779997199773973,
+    "ovrl": 3.29649853971678,
+    "delta_sig_vs_N0": -0.13064553428707804,
+    "delta_bak_vs_N0": -0.008388284931120094,
+    "snr_db": 8.185860835564336,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  },
+  {
+    "idx": 294,
+    "wer": 0.0,
+    "sig": 3.0862067019074537,
+    "bak": 4.005454149391248,
+    "ovrl": 2.8198206726240183,
+    "delta_sig_vs_N0": -0.20218154400940458,
+    "delta_bak_vs_N0": 1.5130940214407582,
+    "snr_db": -1.6643371135233287,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  },
+  {
+    "idx": 293,
+    "wer": 0.0,
+    "sig": 3.367014188683992,
+    "bak": 4.027436753849706,
+    "ovrl": 3.075817913227735,
+    "delta_sig_vs_N0": -0.35489373764754273,
+    "delta_bak_vs_N0": 1.0044776105762265,
+    "snr_db": 3.9720667563912606,
+    "noise_source": "procedural",
+    "robot_state": "motor_low"
+  },
+  {
+    "idx": 398,
+    "wer": 0.0,
+    "sig": 3.1066230152208028,
+    "bak": 4.037907654341576,
+    "ovrl": 2.6981876688156112,
+    "delta_sig_vs_N0": 0.36782471914545756,
+    "delta_bak_vs_N0": 1.10584154646175,
+    "snr_db": 11.518966414596441,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  },
+  {
+    "idx": 397,
+    "wer": 0.0,
+    "sig": 2.994477585430687,
+    "bak": 3.766706102153069,
+    "ovrl": 2.511016557192968,
+    "delta_sig_vs_N0": 0.14840572155335607,
+    "delta_bak_vs_N0": 0.7994271926530967,
+    "snr_db": 11.905081021688598,
+    "noise_source": "uav",
+    "robot_state": "motor_high"
+  },
+  {
+    "idx": 396,
+    "wer": 0.0,
+    "sig": 2.730359157635015,
+    "bak": 3.9029100809427177,
+    "ovrl": 2.4519881954873095,
+    "delta_sig_vs_N0": 1.46487118370548,
+    "delta_bak_vs_N0": 2.726641083805133,
+    "snr_db": -3.647216060699061,
+    "noise_source": "uav",
+    "robot_state": "motor_high"
+  },
+  {
+    "idx": 395,
+    "wer": 0.0,
+    "sig": 3.5224700141119065,
+    "bak": 4.052791423950343,
+    "ovrl": 3.2024169843526256,
+    "delta_sig_vs_N0": 0.049581285607642744,
+    "delta_bak_vs_N0": 0.9920999653102136,
+    "snr_db": 5.528808590896997,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  },
+  {
+    "idx": 263,
+    "wer": 0.0,
+    "sig": 2.7722804963170278,
+    "bak": 3.9051585237921627,
+    "ovrl": 2.52234495715882,
+    "delta_sig_vs_N0": -0.7786279061711574,
+    "delta_bak_vs_N0": 1.183805081945609,
+    "snr_db": 9.78334605265978,
+    "noise_source": "uav",
+    "robot_state": "motor_high"
+  },
+  {
+    "idx": 261,
+    "wer": 0.0,
+    "sig": 3.3480697504188655,
+    "bak": 4.1069361548469425,
+    "ovrl": 3.079285705709611,
+    "delta_sig_vs_N0": 0.029908432660006312,
+    "delta_bak_vs_N0": 0.8404631501234072,
+    "snr_db": 5.6077843643252905,
+    "noise_source": "generic",
+    "robot_state": "generic_background"
+  }
+]

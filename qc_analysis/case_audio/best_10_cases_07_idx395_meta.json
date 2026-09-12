@@ -1,0 +1,16 @@
+{
+  "idx": 395,
+  "wer": 0.0,
+  "sig": 3.5224700141119065,
+  "bak": 4.052791423950343,
+  "ovrl": 3.2024169843526256,
+  "delta_sig_vs_N0": 0.049581285607642744,
+  "delta_bak_vs_N0": 0.9920999653102136,
+  "snr_db": 5.528808590896997,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "3081-166546-0029",
+  "transcript": "THE SUGGESTION HE HAD LAUGHED AT WAS NOT SO ENTIRELY FOOLISH AS HE HAD BEEN PLEASED TO CONSIDER IT",
+  "distance_m": 1.0,
+  "angle_deg": 90
+}

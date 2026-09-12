@@ -1,0 +1,16 @@
+{
+  "idx": 396,
+  "wer": 0.0,
+  "sig": 2.730359157635015,
+  "bak": 3.9029100809427177,
+  "ovrl": 2.4519881954873095,
+  "delta_sig_vs_N0": 1.46487118370548,
+  "delta_bak_vs_N0": 2.726641083805133,
+  "snr_db": -3.647216060699061,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "3081-166546-0001",
+  "transcript": "INSTANTLY THEY ABSORBED ALL MY ATTENTION THOUGH I DARED NOT GIVE THEM A DIRECT LOOK AND CONTINUED TO OBSERVE THEM ONLY IN THE GLASS",
+  "distance_m": 1.0,
+  "angle_deg": 45
+}

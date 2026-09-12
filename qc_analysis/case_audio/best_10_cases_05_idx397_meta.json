@@ -1,0 +1,16 @@
+{
+  "idx": 397,
+  "wer": 0.0,
+  "sig": 2.994477585430687,
+  "bak": 3.766706102153069,
+  "ovrl": 2.511016557192968,
+  "delta_sig_vs_N0": 0.14840572155335607,
+  "delta_bak_vs_N0": 0.7994271926530967,
+  "snr_db": 11.905081021688598,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "3081-166546-0076",
+  "transcript": "WHAT MADE THE DIFFERENCE",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

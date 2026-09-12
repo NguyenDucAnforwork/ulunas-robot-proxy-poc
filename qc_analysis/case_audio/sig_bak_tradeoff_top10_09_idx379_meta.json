@@ -1,0 +1,16 @@
+{
+  "idx": 379,
+  "wer": 0.5416666666666666,
+  "sig": 2.2694149969989508,
+  "bak": 3.8353795142790625,
+  "ovrl": 2.0592974359706546,
+  "delta_sig_vs_N0": -0.057969642098373075,
+  "delta_bak_vs_N0": 2.351314196422816,
+  "snr_db": -1.3592920908646344,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170145-0003",
+  "transcript": "OF COURSE I KNOW BARTLEY SHE SAID AT LAST THAT AFTER THIS YOU WON'T OWE ME THE LEAST CONSIDERATION BUT WE SAIL ON TUESDAY",
+  "distance_m": 0.5,
+  "angle_deg": 90
+}

@@ -1,0 +1,16 @@
+{
+  "idx": 306,
+  "wer": 0.0,
+  "sig": 2.1098444513016794,
+  "bak": 3.868413044435641,
+  "ovrl": 1.9334678085823138,
+  "delta_sig_vs_N0": -0.38564949762550027,
+  "delta_bak_vs_N0": 2.259388473622928,
+  "snr_db": 2.3576350428663257,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170142-0024",
+  "transcript": "AFTER THE VERY FIRST",
+  "distance_m": 1.0,
+  "angle_deg": 90
+}

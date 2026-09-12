@@ -1,0 +1,16 @@
+{
+  "idx": 237,
+  "wer": 0.5483870967741935,
+  "sig": 2.104180565426336,
+  "bak": 3.797332379679852,
+  "ovrl": 1.9254046642474367,
+  "delta_sig_vs_N0": -0.968995969319896,
+  "delta_bak_vs_N0": 1.82440839752372,
+  "snr_db": -4.545443199197101,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "2277-149897-0022",
+  "transcript": "ALL DAY THE BAR BEING CLOSED HE BROODED ALONE SHUT OUT FROM HOME FROM THE EXCITEMENT OF HIS RESORT FROM CARRIE AND WITHOUT THE ABILITY TO ALTER HIS CONDITION ONE IOTA",
+  "distance_m": 0.5,
+  "angle_deg": 0
+}

@@ -1,0 +1,90 @@
+{
+  "n_utterances_tested": 10,
+  "total_frames_tested": 3418,
+  "max_abs_frame_err_over_all_utt": 7.62939453125e-06,
+  "max_wave_rmse_over_all_utt": 4.8208352382062e-05,
+  "pass_max_abs_error_1e4": true,
+  "pass_waveform_rmse_1e4": true,
+  "per_utterance": [
+    {
+      "wav": "utt00_noisy.wav",
+      "n_frames": 152,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 7.62939453125e-06,
+      "wave_rmse_onnx_vs_offline": 2.4000896701181773e-06,
+      "wave_rmse_streaming_torch_vs_offline": 2.400094217591686e-06,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt01_noisy.wav",
+      "n_frames": 426,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 1.0021258844972181e-07,
+      "wave_rmse_streaming_torch_vs_offline": 1.0011747519911296e-07,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt02_noisy.wav",
+      "n_frames": 550,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 4.939072937304445e-07,
+      "wave_rmse_streaming_torch_vs_offline": 4.938736424264789e-07,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt03_noisy.wav",
+      "n_frames": 206,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 4.8208352382062e-05,
+      "wave_rmse_streaming_torch_vs_offline": 4.820835602004081e-05,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt04_noisy.wav",
+      "n_frames": 356,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 5.818354111397639e-06,
+      "wave_rmse_streaming_torch_vs_offline": 5.818369118060218e-06,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt05_noisy.wav",
+      "n_frames": 923,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 2.4748906923832692e-08,
+      "wave_rmse_streaming_torch_vs_offline": 2.4163320233583363e-08,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt06_noisy.wav",
+      "n_frames": 129,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 7.816945981176104e-06,
+      "wave_rmse_streaming_torch_vs_offline": 7.816961442586035e-06,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt07_noisy.wav",
+      "n_frames": 199,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 1.9073486328125e-06,
+      "wave_rmse_onnx_vs_offline": 6.77820526107098e-06,
+      "wave_rmse_streaming_torch_vs_offline": 6.778206625313032e-06,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt08_noisy.wav",
+      "n_frames": 243,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 2.039352239080472e-06,
+      "wave_rmse_streaming_torch_vs_offline": 2.0393458726175595e-06,
+      "has_nan_or_inf": false
+    },
+    {
+      "wav": "utt09_noisy.wav",
+      "n_frames": 234,
+      "max_abs_frame_err_onnx_vs_streaming_torch": 3.814697265625e-06,
+      "wave_rmse_onnx_vs_offline": 9.237943459083908e-07,
+      "wave_rmse_streaming_torch_vs_offline": 9.237928111360816e-07,
+      "has_nan_or_inf": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "idx": 158,
+  "wer": 1.0,
+  "sig": 3.316607457564328,
+  "bak": 4.118884885042728,
+  "ovrl": 3.064587640701742,
+  "delta_sig_vs_N0": 0.20608988079414825,
+  "delta_bak_vs_N0": 0.8938107151241224,
+  "snr_db": 14.417225726463702,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "6313-76958-0023",
+  "transcript": "GRUB PI LE GRUB PI LE",
+  "distance_m": 2.0,
+  "angle_deg": 0
+}

@@ -1,0 +1,16 @@
+{
+  "idx": 142,
+  "wer": 0.75,
+  "sig": 2.7940081990921395,
+  "bak": 3.274818986575363,
+  "ovrl": 2.3373540058025277,
+  "delta_sig_vs_N0": 0.17766209274444478,
+  "delta_bak_vs_N0": 1.4324569833187872,
+  "snr_db": 8.755611391515432,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "6313-76958-0008",
+  "transcript": "HUMPH GRUNTED CURLEY ADAMS",
+  "distance_m": 2.0,
+  "angle_deg": 90
+}

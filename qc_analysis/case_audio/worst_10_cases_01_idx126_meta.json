@@ -1,0 +1,16 @@
+{
+  "idx": 126,
+  "wer": 0.85,
+  "sig": 2.305515302356565,
+  "bak": 3.245208049027583,
+  "ovrl": 1.937703708163098,
+  "delta_sig_vs_N0": 1.1294917814438048,
+  "delta_bak_vs_N0": 2.1333521895914536,
+  "snr_db": -4.296100398412501,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "6313-66125-0011",
+  "transcript": "BE SURE TO FASTEN HIM SECURELY TO THE LOOP BEFORE YOU GIVE THE SIGNAL TO HAUL UP WARNED THE GUIDE",
+  "distance_m": 2.0,
+  "angle_deg": 90
+}

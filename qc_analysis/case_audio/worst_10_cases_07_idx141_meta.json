@@ -1,0 +1,16 @@
+{
+  "idx": 141,
+  "wer": 0.6470588235294118,
+  "sig": 2.9316326089143048,
+  "bak": 3.573205213695511,
+  "ovrl": 2.509196467920473,
+  "delta_sig_vs_N0": 1.728185638792199,
+  "delta_bak_vs_N0": 2.451900635114495,
+  "snr_db": -4.791421918231542,
+  "noise_source": "generic",
+  "robot_state": "generic_background",
+  "utt_id": "6313-76958-0017",
+  "transcript": "LUMPY BATES CAME RUNNING TOWARD HIM NOT DARING TO CALL OUT FOR FEAR OF WAKING THE CAMP",
+  "distance_m": 2.0,
+  "angle_deg": 90
+}

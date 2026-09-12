@@ -1,0 +1,16 @@
+{
+  "idx": 335,
+  "wer": 0.6875,
+  "sig": 2.432814090470598,
+  "bak": 3.731013364766762,
+  "ovrl": 2.156203250816169,
+  "delta_sig_vs_N0": 1.245168695623206,
+  "delta_bak_vs_N0": 2.580790586358755,
+  "snr_db": -1.3413459961803476,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170138-0022",
+  "transcript": "IN A MOMENT PEGGY WAS ON THE STAGE AGAIN AND ALEXANDER APPLAUDED VIGOROUSLY WITH THE REST",
+  "distance_m": 0.5,
+  "angle_deg": 90
+}

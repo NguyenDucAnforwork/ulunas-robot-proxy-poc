@@ -1,0 +1,16 @@
+{
+  "idx": 263,
+  "wer": 0.0,
+  "sig": 2.7722804963170278,
+  "bak": 3.9051585237921627,
+  "ovrl": 2.52234495715882,
+  "delta_sig_vs_N0": -0.7786279061711574,
+  "delta_bak_vs_N0": 1.183805081945609,
+  "snr_db": 9.78334605265978,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "2277-149897-0027",
+  "transcript": "HE WOULD GO TO HER AND TELL HER ALL HIS FAMILY COMPLICATIONS",
+  "distance_m": 2.0,
+  "angle_deg": 45
+}

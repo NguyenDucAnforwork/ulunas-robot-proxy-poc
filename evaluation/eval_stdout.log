@@ -1,0 +1,125 @@
+Building fixed synthetic test set...
+  563 synthetic paired utterances
+Building command test set...
+  300 command utterances
+[1;31m2026-09-12 13:26:18.424307596 [E:onnxruntime:Default, provider_bridge_ort.cc:2395 TryGetProviderInfo_CUDA] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1988 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /usr/local/lib/python3.13/dist-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so with error: libcublasLt.so.13: cannot open shared object file: No such file or directory
+[m
+[0;93m2026-09-12 13:26:18.424378363 [W:onnxruntime:Default, onnxruntime_pybind_state.cc:1294 CreateExecutionProviderFactoryInstance] Failed to create CUDAExecutionProvider. Require cuDNN 9.* and CUDA 13.*. Please install all dependencies as mentioned in the GPU requirements page (https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements), make sure they're in the PATH, and that your GPU is supported.[m
+[1;31m2026-09-12 13:26:18.438737855 [E:onnxruntime:Default, provider_bridge_ort.cc:2395 TryGetProviderInfo_CUDA] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1988 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /usr/local/lib/python3.13/dist-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so with error: libcublasLt.so.13: cannot open shared object file: No such file or directory
+[m
+[0;93m2026-09-12 13:26:18.438763314 [W:onnxruntime:Default, onnxruntime_pybind_state.cc:1294 CreateExecutionProviderFactoryInstance] Failed to create CUDAExecutionProvider. Require cuDNN 9.* and CUDA 13.*. Please install all dependencies as mentioned in the GPU requirements page (https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements), make sure they're in the PATH, and that your GPU is supported.[m
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/212 [00:00<?, ?it/s]Loading weights: 100%|██████████| 212/212 [00:00<00:00, 3757.62it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-base-960h
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Evaluating synthetic test set...
+  synthetic progress: 0/563
+  synthetic progress: 25/563
+  synthetic progress: 50/563
+  synthetic progress: 75/563
+  synthetic progress: 100/563
+  synthetic progress: 125/563
+  synthetic progress: 150/563
+  synthetic progress: 175/563
+  synthetic progress: 200/563
+  synthetic progress: 225/563
+  synthetic progress: 250/563
+  synthetic progress: 275/563
+  synthetic progress: 300/563
+  synthetic progress: 325/563
+  synthetic progress: 350/563
+  synthetic progress: 375/563
+  synthetic progress: 400/563
+  synthetic progress: 425/563
+  synthetic progress: 450/563
+  synthetic progress: 475/563
+  synthetic progress: 500/563
+  synthetic progress: 525/563
+  synthetic progress: 550/563
+Checkpoint saved: /content/project/evaluation/checkpoint_synthetic_raw.json
+Evaluating command test set...
+Saving audio comparison samples...
+=== EVAL DONE ===
+{
+  "synthetic_test_n": 563,
+  "command_test_n": 300,
+  "conditions": {
+    "N0": {
+      "dnsmos_SIG_mean": 3.1250175655260626,
+      "dnsmos_SIG_median": 3.4490961060640237,
+      "dnsmos_BAK_mean": 2.9254966808358827,
+      "dnsmos_BAK_median": 3.1329881988056636,
+      "dnsmos_OVRL_mean": 2.504917300191965,
+      "dnsmos_OVRL_median": 2.6899711052104247,
+      "sisdr_mean": 5.0874222331741565,
+      "sisdr_median": 5.022282123565674,
+      "stoi_mean": 0.9269301127750426,
+      "stoi_median": 0.9554799753161886,
+      "wer_corpus": 0.10904982756570342,
+      "wer_mean_per_utt": 0.11704829468582775,
+      "command_exact_match_acc": 0.4633333333333333,
+      "command_deletion_rate": 0.04,
+      "command_substitution_rate": 0.49666666666666665
+    },
+    "P0": {
+      "dnsmos_SIG_mean": 3.3076480118797473,
+      "dnsmos_SIG_median": 3.3971639323114844,
+      "dnsmos_BAK_mean": 3.9889391323980394,
+      "dnsmos_BAK_median": 4.061947318655031,
+      "dnsmos_OVRL_mean": 2.9964641229628626,
+      "dnsmos_OVRL_median": 3.0811560310273363,
+      "sisdr_mean": 13.332512513279491,
+      "sisdr_median": 13.706995010375977,
+      "stoi_mean": 0.9301243599310868,
+      "stoi_median": 0.9624740945687258,
+      "wer_corpus": 0.09537400404328696,
+      "wer_mean_per_utt": 0.10626193244113005,
+      "command_exact_match_acc": 0.43333333333333335,
+      "command_deletion_rate": 0.023333333333333334,
+      "command_substitution_rate": 0.5433333333333333
+    },
+    "F_GENERIC": {
+      "dnsmos_SIG_mean": 3.338720847705723,
+      "dnsmos_SIG_median": 3.418605074423908,
+      "dnsmos_BAK_mean": 4.041540364217691,
+      "dnsmos_BAK_median": 4.102793739271963,
+      "dnsmos_OVRL_mean": 3.0542376191336773,
+      "dnsmos_OVRL_median": 3.127978311550879,
+      "sisdr_mean": 18.226894660010853,
+      "sisdr_median": 19.08795166015625,
+      "stoi_mean": 0.9397888239231151,
+      "stoi_median": 0.9696906528361255,
+      "wer_corpus": 0.08288738256629802,
+      "wer_mean_per_utt": 0.09105986272751006,
+      "command_exact_match_acc": 0.44666666666666666,
+      "command_deletion_rate": 0.02666666666666667,
+      "command_substitution_rate": 0.5266666666666666
+    },
+    "F_GENERIC_ASR": {
+      "dnsmos_SIG_mean": 3.3311909713249106,
+      "dnsmos_SIG_median": 3.410157816535526,
+      "dnsmos_BAK_mean": 4.043355215197174,
+      "dnsmos_BAK_median": 4.103267257432039,
+      "dnsmos_OVRL_mean": 3.048958267741263,
+      "dnsmos_OVRL_median": 3.127751230979898,
+      "sisdr_mean": 18.201025327452545,
+      "sisdr_median": 18.98023223876953,
+      "stoi_mean": 0.9399377045920321,
+      "stoi_median": 0.9695852847058852,
+      "wer_corpus": 0.08039005827090022,
+      "wer_mean_per_utt": 0.08784370584305351,
+      "command_exact_match_acc": 0.4666666666666667,
+      "command_deletion_rate": 0.03333333333333333,
+      "command_substitution_rate": 0.5
+    }
+  },
+  "paired_bootstrap_ci": {
+    "P0": {
+      "delta_sig_vs_N0": {
+        "delta": 0.18263044635368475,
+        "ci95_lo": 

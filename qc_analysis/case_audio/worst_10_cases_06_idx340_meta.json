@@ -1,0 +1,16 @@
+{
+  "idx": 340,
+  "wer": 0.6470588235294118,
+  "sig": 2.333313460422252,
+  "bak": 3.8220727241038497,
+  "ovrl": 2.0959532439734025,
+  "delta_sig_vs_N0": 0.7980185869950782,
+  "delta_bak_vs_N0": 2.5191943309013296,
+  "snr_db": -3.0073529789626186,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "1462-170138-0017",
+  "transcript": "SIR HARRY TOWNE BOWED AND SAID THAT HE HAD MET MISTER ALEXANDER AND HIS WIFE IN TOKYO",
+  "distance_m": 0.5,
+  "angle_deg": 180
+}

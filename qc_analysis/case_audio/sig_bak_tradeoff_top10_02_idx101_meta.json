@@ -1,0 +1,16 @@
+{
+  "idx": 101,
+  "wer": 0.14285714285714285,
+  "sig": 2.439687044254328,
+  "bak": 3.9445455985912825,
+  "ovrl": 2.2693647793883107,
+  "delta_sig_vs_N0": -0.39777461921113044,
+  "delta_bak_vs_N0": 2.299810358424814,
+  "snr_db": -2.4082740098875455,
+  "noise_source": "uav",
+  "robot_state": "motor_high",
+  "utt_id": "6313-66125-0013",
+  "transcript": "HE TILTED HIS HEAD TO LOOK UP",
+  "distance_m": 2.0,
+  "angle_deg": 45
+}
