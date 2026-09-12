@@ -81,6 +81,20 @@ The hypothesis under test: does the model over-suppress, raising BAK (less resid
 - **Best 10**: WER=0.0 for all 10, all `generic_background` noise, spanning SNR from -1.7dB to +8.2dB — showing the model can achieve perfect transcription even at low SNR when the noise is the (in-domain, well-represented) generic type, reinforcing that noise *type*, not just SNR, drives outcomes.
 - Actual audio (noisy/clean/enhanced) and spectrograms for every one of these 30 cases are saved under `qc_analysis/case_audio/` for manual listening/inspection.
 
+### 4.3b Observation-adding tested as a mitigation — does NOT solve the tradeoff (real result, `evaluation/observation_adding_sweep_results.json`)
+
+Ran the full alpha sweep (`output = (1-α)·enhanced + α·noisy`, α∈{0,0.05,0.1,0.2,0.3}) on `F_PROXY_ROBOT`, full 563-utterance test set, both overall and on the UAV-`motor_high`+`fan` tradeoff subset (n=207) identified in §4.2:
+
+| α | SIG (subset) | BAK (subset) | OVRL (full) | WER (full) |
+|---|---|---|---|---|
+| 0.00 | 2.840 | 3.906 | 2.842 | 8.17% |
+| 0.05 | 2.855 (+0.015) | 3.642 (-0.264) | 2.788 (-0.054, **exceeds material threshold**) | 7.68% (-0.49pt, not material) |
+| 0.10 | 2.913 (+0.073) | 3.412 (-0.494) | 2.751 (-0.091) | 7.96% |
+| 0.20 | 2.928 (+0.088) | 3.030 (-0.876) | 2.676 (-0.166) | 8.29% (worse than baseline) |
+| 0.30 | 2.875 (+0.035) | 3.185→2.756 (-1.150) | 2.597 (-0.245) | 9.45% (+1.28pt, material, worse) |
+
+**Conclusion: observation-adding does NOT solve the SIG-BAK tradeoff — it trades one axis for another, and does not fix intelligibility.** SIG does rise modestly in exactly the subset where it was damaged (+0.07 to +0.09 at α=0.1-0.2), confirming the mechanism (blending back original signal restores some perceived naturalness). But **BAK/OVRL fall faster than SIG rises at every α tested**, and — critically — **WER in the tradeoff subset never improves** at any α (flat at best, clearly worse at α=0.3). This means over-suppression is genuinely deleting speech content (not just making it sound unnatural), and blending back noisy signal cannot recover deleted phonetic information — it can only make the output sound more natural while the content damage remains. No α in the tested range dominates the α=0 baseline on every metric; this is reported as the real, unresolved negative result it is, not spun as a fix. (Point estimates only — no bootstrap CI computed for this supplementary sweep; the WER deltas at small α are likely within noise given the scale of the M1/robot-proxy CIs on comparably-sized deltas.)
+
 ### 4.4 What was NOT done (honest gaps)
 
 - No counterfactual/matched-pair tests (brief §6's "giữ speech, thay noise" etc.) were run — the analysis above is drawn from the natural variation in the random test set, not controlled swaps. This is a real limitation: the SIG-BAK tradeoff finding in §4.2 is evidence-based correlation with a plausible mechanism, explicitly not elevated to "proven causation."

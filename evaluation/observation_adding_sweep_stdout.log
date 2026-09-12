@@ -1,0 +1,28 @@
+Loading F_PROXY_ROBOT and rebuilding the same deterministic test set...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/212 [00:00<?, ?it/s]Loading weights: 100%|██████████| 212/212 [00:00<00:00, 5570.58it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-base-960h
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  progress: 0/563
+  progress: 50/563
+  progress: 100/563
+  progress: 150/563
+  progress: 200/563
+  progress: 250/563
+  progress: 300/563
+  progress: 350/563
+  progress: 400/563
+  progress: 450/563
+  progress: 500/563
+  progress: 550/563
+alpha=0.0: SIG=3.137 BAK=3.952 OVRL=2.842 WER=0.0817 | tradeoff-subset(n=207) SIG=2.840 BAK=3.906 WER=0.1270
+alpha=0.05: SIG=3.151 BAK=3.782 OVRL=2.788 WER=0.0768 | tradeoff-subset(n=207) SIG=2.855 BAK=3.642 WER=0.1281
+alpha=0.1: SIG=3.173 BAK=3.619 OVRL=2.751 WER=0.0796 | tradeoff-subset(n=207) SIG=2.913 BAK=3.412 WER=0.1274
+alpha=0.2: SIG=3.175 BAK=3.372 OVRL=2.676 WER=0.0829 | tradeoff-subset(n=207) SIG=2.928 BAK=3.030 WER=0.1292
+alpha=0.3: SIG=3.145 BAK=3.185 OVRL=2.597 WER=0.0945 | tradeoff-subset(n=207) SIG=2.875 BAK=2.756 WER=0.1460
+=== SWEEP DONE ===
