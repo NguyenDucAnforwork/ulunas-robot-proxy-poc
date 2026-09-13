@@ -51,6 +51,9 @@ def main():
                                     "env": item.get("env")})
         for fname, state in uav_files[split]:
             path = f"{UAV_DIR}/{fname}"
+            if not os.path.exists(path):
+                print(f"[build_manifest] WARN missing UAV {path}, skipping (KU Leuven dl may have failed)")
+                continue
             info = sf.info(path)
             combined[split].append({"path": path, "duration": info.duration,
                                     "source": "uav", "robot_state": state,

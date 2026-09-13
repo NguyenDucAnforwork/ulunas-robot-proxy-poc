@@ -66,10 +66,18 @@ def build_noise_manifest():
     manifest = {"train": [], "val": [], "test": []}
     for split_name, envs in [("train", NOISE_TRAIN), ("val", NOISE_VAL), ("test", NOISE_TEST)]:
         for env in envs:
-            f = os.path.join(DEMAND_ROOT, env, env, "ch01.wav")
-            assert os.path.exists(f), f
+            # DEMAND *_16k.zip extracts to <env>/ch01.wav (single level); tolerate the
+            # legacy double-<env> layout too. Skip envs that failed to download (flaky
+            # Zenodo mirror) -- assert below that each split still has >=1 env.
+            cands = [os.path.join(DEMAND_ROOT, env, "ch01.wav"),
+                     os.path.join(DEMAND_ROOT, env, env, "ch01.wav")]
+            f = next((c for c in cands if os.path.exists(c)), None)
+            if f is None:
+                print(f"[split_manifest] WARN missing DEMAND env {env}, skipping")
+                continue
             info = sf.info(f)
             manifest[split_name].append({"path": f, "env": env, "duration": info.duration})
+        assert len(manifest[split_name]) > 0, f"no DEMAND envs available for {split_name}"
     assert set(NOISE_TRAIN).isdisjoint(NOISE_VAL)
     assert set(NOISE_TRAIN).isdisjoint(NOISE_TEST)
     assert set(NOISE_VAL).isdisjoint(NOISE_TEST)
