@@ -13,7 +13,7 @@ mobile/android_ref/build_x86_host/
 
 # Model checkpoints -- uploaded to Hugging Face instead (see README for the repo link),
 # not duplicated here to keep the git repo lean.
-checkpoints/*.tar
+checkpoints/**/*.tar
 
 # Python
 __pycache__/
