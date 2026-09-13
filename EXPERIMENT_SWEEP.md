@@ -208,8 +208,20 @@ parity-safe, classic deployment win with the default build left untouched.
 
 Higher-payoff inference levers (NEON on grouped Conv/ConvTranspose, fp16-SIMD GRU) require
 **real ARM silicon** to measure meaningfully (x86 has no NEON; qemu timing is not predictive).
-Recommended next step: AWS Graviton for a real-ARM profile, then EC2 Mac + Device Farm to
-unblock the iPhone build/benchmark — see the Codex plan in the session history.
+
+**Update (follow-up session, real ARM data landed):** got a real AWS Graviton2
+(Neoverse-N1) instance up under a locked-down benchmark-only IAM policy (no SSH/S3 —
+console-output-only I/O) and ran a faithful microbenchmark of the exact `kernels.h`
+primitives at representative sizes — see `mobile/c_neon/ARM_MICROBENCH_RESULTS.md`.
+Headline: **NEON dot-product is 7.83x faster than scalar on real ARM** (a number x86
+structurally cannot produce), full GRU-cell-step speedup is a more modest 2.55x
+(non-vectorized sigmoid/tanh + short-dot-product overhead dilute it), and BatchNorm
+removal costs 1443.78 ns/call on real ARM for the largest pointwise stage — a real ARM
+number for what `BN_FOLD_RESULTS.md` could only show on x86. This is a synthetic
+per-primitive microbenchmark, not a full-graph hop-latency number (the real 4.7MB
+weight header couldn't fit through the only available data channel, EC2 user-data's
+16KB limit) — full-graph real-ARM RTF and the actual iPhone/Cortex-A53 target remain
+open, see that doc's "Next steps".
 
 ---
 
