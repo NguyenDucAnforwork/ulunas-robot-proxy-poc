@@ -1,0 +1,11 @@
+{
+  "arm": "control",
+  "out_tag": "arm_control",
+  "steps": 18000,
+  "batch_size": 8,
+  "base_lr": 1e-05,
+  "total_wall_s": 1926.0226426124573,
+  "steps_per_sec": 9.345684521955983,
+  "peak_vram_mb": 941.235712,
+  "best_val_se_loss": 0.2281413793563843
+}

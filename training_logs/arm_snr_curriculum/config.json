@@ -1,0 +1,18 @@
+{
+  "arm": "snr_curriculum",
+  "steps": 18000,
+  "batch_size": 8,
+  "base_lr": 1e-05,
+  "out_tag": "arm_snr_curriculum",
+  "val_every": 2000,
+  "preserve_weight": 20.0,
+  "curr_switch": 6000,
+  "seed": 43,
+  "n_bn_frozen": 22,
+  "lamda_sisnr": 1.0,
+  "init_snr": [
+    5,
+    15
+  ],
+  "pretrained": "/content/repos/ul-unas/checkpoints/model_trained_on_dns3.tar"
+}

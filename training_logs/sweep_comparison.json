@@ -1,0 +1,38 @@
+[
+  {
+    "tag": "arm_snr_curriculum",
+    "n_val": 9,
+    "final_val_se": 0.22792409658432006,
+    "final_val_sisdr": 18.51097140312195,
+    "best_val_se": 0.22792409658432006,
+    "steps_per_sec": 9.300419540328704,
+    "steps": 18000
+  },
+  {
+    "tag": "arm_control",
+    "n_val": 9,
+    "final_val_se": 0.2281413793563843,
+    "final_val_sisdr": 18.511621236801147,
+    "best_val_se": 0.2281413793563843,
+    "steps_per_sec": 9.345684521955983,
+    "steps": 18000
+  },
+  {
+    "tag": "arm_lr_sched",
+    "n_val": 9,
+    "final_val_se": 0.24034723043441772,
+    "final_val_sisdr": 18.450005626678468,
+    "best_val_se": 0.24034723043441772,
+    "steps_per_sec": 9.412480533045,
+    "steps": 18000
+  },
+  {
+    "tag": "arm_preserve",
+    "n_val": 9,
+    "final_val_se": 1.53318247795105,
+    "final_val_sisdr": 18.415060186386107,
+    "best_val_se": 1.53318247795105,
+    "steps_per_sec": 9.20891616152522,
+    "steps": 18000
+  }
+]

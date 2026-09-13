@@ -1,0 +1,11 @@
+{
+  "arm": "lr_sched",
+  "out_tag": "arm_lr_sched",
+  "steps": 18000,
+  "batch_size": 8,
+  "base_lr": 1e-05,
+  "total_wall_s": 1912.354552745819,
+  "steps_per_sec": 9.412480533045,
+  "peak_vram_mb": 941.235712,
+  "best_val_se_loss": 0.24034723043441772
+}

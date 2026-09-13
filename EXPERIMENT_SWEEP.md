@@ -105,9 +105,40 @@ Reproduce: `python3 train_arm.py --arm <arm> --steps 18000 --out_tag arm_<arm>` 
 
 ---
 
-## 4. Sweep results  <!-- FILLED AFTER TRAINING -->
+## 4. Sweep results
 
-_(pending — populated by `compare_arms.py` when the four arms finish.)_
+All 4 arms ran **concurrently under MPS** to 18k steps in **~32 min total** (9.2–9.4
+steps/s each; 941 MB VRAM each; budget used 07:37→08:10). No NaN/Inf.
+
+### 4.1 Proxy metric — validation SI-SDR (comparable across arms)
+
+| Arm | val SI-SDR | Δ vs control |
+|---|---|---|
+| **arm_control** | **18.512 dB** | — |
+| arm_snr_curriculum | 18.511 dB | −0.001 (tie) |
+| arm_lr_sched | 18.450 dB | −0.062 |
+| arm_preserve | 18.415 dB | −0.097 |
+
+> **Do not compare arms by validation SE-loss:** `arm_preserve` uses a different loss
+> (`lamda_sisnr` 0.3 + preservation term), so its SE-loss (1.53) is on a different scale
+> than the others' (~0.23). SI-SDR is the common, comparable proxy.
+
+**Reading:** on the fast SI-SDR proxy at 18k steps, **no intervention beats control.**
+`snr_curriculum` ties it; `lr_sched` and `preserve` are marginally *lower* on SI-SDR
+(−0.06 / −0.10 dB). Crucially, **SI-SDR is exactly the waveform-fidelity quantity the
+`preserve` arm deliberately trades away** to keep speech magnitude — so a small SI-SDR
+dip is *consistent with* its hypothesis, not a refutation. The `preserve` question can
+only be answered by **DNSMOS SIG** (§4.2). `lr_sched`'s cosine decay to 1e-6 starves the
+last steps of learning rate, so at equal 18k steps it slightly trails constant-LR — i.e.
+the schedule did not help convergence within this budget.
+
+### 4.2 Perceptual verdict — reduced DNSMOS eval (150 paired test mixtures)
+
+DNSMOS P.835 SIG/BAK/OVRL + SI-SDR + STOI, same 150 deterministic robot-proxy test
+mixtures for every condition (paired). This is the metric that tests the `preserve`
+hypothesis. WER (wav2vec2) skipped for the time window — noted as follow-up.
+
+_(pending — populated by `eval_arms_dnsmos.py`.)_
 
 ---
 
