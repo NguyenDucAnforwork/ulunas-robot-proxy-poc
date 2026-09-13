@@ -107,7 +107,11 @@ b9c0621e91e1094a2e366f53228fb2b24340f00dba19a32bdfe34b0b22d494e8  F_GENERIC_ASR.
 5394d0c012e500b37d4c2076cf5b847d9db07348c135bd15deb3f6904fa0167e  F_PROXY_ROBOT_best.tar
 36d523c1647dda9ca8f81b3cfc4819bc1694b9776a0688fa1dd356be5c3e5b3c  F_PROXY_ROBOT_ASR.tar
 0f9f23f7c752c5139cddfc38bc3dae57de56d33f49c10dc0e4a403801ec6ded4  F_PROXY_ROBOT_ASR_best.tar
+5c23c0ba63fe01ba9180674431e60a8d62398de5cf1e3607ac7329edf5bfe10c  F_PROXY_ROBOT_LOWSUP.tar
+894b29ca0277e5d80ed853d91c6e518fd7e556028b683f7d1a9057fbac8e019b  F_PROXY_ROBOT_LOWSUP_best.tar
 ```
+
+`F_PROXY_ROBOT_LOWSUP`: reduced-suppression ablation (`lamda_mag` 70→35), see `QC_FAILURE_ANALYSIS.md` §4.3c — real negative result, not an improvement.
 
 These are the exact checkpoints produced and uploaded in this session (computed via `sha256sum`, not re-derived) — training is not bit-exact-reproducible run-to-run (GPU float non-determinism, unseeded `DataLoader` workers), so a fresh training run will produce *equivalent* but not *hash-identical* checkpoints. Use these hashes only to verify you have the exact same uploaded files, not to validate a fresh retrain.
 
