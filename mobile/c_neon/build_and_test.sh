@@ -41,5 +41,10 @@ g++ -O0 -g -fsanitize=address,undefined -std=c++17 -I../src ../src/test_edge_cas
 ./test_edge_cases_san
 
 echo ""
+echo "== latency benchmark (x86 host -- SIMULATED, not a real-hardware number, see MOBILE_BENCHMARK.md §4) =="
+g++ -O2 -std=c++17 -I../src ../src/benchmark_latency.cpp ../src/ulunas_full.cpp -o benchmark_latency_x86 2>/dev/null
+./benchmark_latency_x86 2000 100
+
+echo ""
 echo "All tests completed. See MOBILE_BENCHMARK.md for the interpretation of these numbers"
 echo "(expected error magnitudes, the documented streaming-vs-offline latency caveat, etc.)."

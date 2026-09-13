@@ -59,7 +59,8 @@ def make_loaders(batch_size, segment_seconds, with_transcript):
     return train_loader, val_loader, manifest_hash(speech_path), manifest_hash(noise_path)
 
 
-def run(variant, total_steps, batch_size, segment_seconds, benchmark_only, lambda_asr_arg, out_tag):
+def run(variant, total_steps, batch_size, segment_seconds, benchmark_only, lambda_asr_arg, out_tag,
+        lamda_ri=30, lamda_mag=70):
     set_seed(SEED)
     device = torch.device("cuda:0")
     with_asr = variant == "se_asr"
@@ -68,7 +69,9 @@ def run(variant, total_steps, batch_size, segment_seconds, benchmark_only, lambd
     model.train()
     n_bn = freeze_bn_running_stats(model)
 
-    se_loss_fn = HybridLoss().to(device)
+    # lamda_ri/lamda_mag default to HybridLoss's own original values (30/70) -- only differ
+    # when explicitly overridden (e.g. --lamda_mag 35 for a reduced-suppression ablation).
+    se_loss_fn = HybridLoss(lamda_ri=lamda_ri, lamda_mag=lamda_mag).to(device)
     asr_loss_fn = FrozenCTCLoss(device) if with_asr else None
 
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
@@ -83,7 +86,7 @@ def run(variant, total_steps, batch_size, segment_seconds, benchmark_only, lambd
     cfg = {"variant": variant, "total_steps": total_steps, "batch_size": batch_size,
            "segment_seconds": segment_seconds, "seed": SEED, "lr": 1e-5,
            "pretrained_ckpt": PRETRAINED_CKPT, "speech_manifest_hash": speech_hash,
-           "noise_manifest_hash": noise_hash}
+           "noise_manifest_hash": noise_hash, "lamda_ri": lamda_ri, "lamda_mag": lamda_mag}
     cfg_hash = config_hash(cfg)
     cfg["config_hash"] = cfg_hash
     with open(f"{LOG_DIR}/{out_tag}/config.json", "w") as f:
@@ -228,7 +231,9 @@ if __name__ == "__main__":
     p.add_argument("--benchmark", action="store_true")
     p.add_argument("--lambda_asr", type=float, default=None)
     p.add_argument("--out_tag", type=str, required=True)
+    p.add_argument("--lamda_ri", type=float, default=30, help="HybridLoss RI-loss weight (default 30, same as M1/F_PROXY_ROBOT)")
+    p.add_argument("--lamda_mag", type=float, default=70, help="HybridLoss magnitude-loss weight (default 70, same as M1/F_PROXY_ROBOT)")
     args = p.parse_args()
 
     run(args.variant, args.steps, args.batch_size, args.segment_seconds,
-        args.benchmark, args.lambda_asr, args.out_tag)
+        args.benchmark, args.lambda_asr, args.out_tag, args.lamda_ri, args.lamda_mag)
