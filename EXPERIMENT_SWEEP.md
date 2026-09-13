@@ -22,7 +22,14 @@ where a number is an estimate or from a different machine it says so.
 - **Training sweep:** 4 arms, batch 8, seed 43, DNS3 init, 18k steps each, run **concurrently
   under MPS** in ~30 min total: `control`, `lr_sched` (warmup+cosine), `preserve`
   (speech-preservation loss targeting the SIG over-suppression regression), `snr_curriculum`.
-  Judged by proxy metric (validation SE-loss + SI-SDR). Results in §4.
+  **Fast SI-SDR proxy (§4.1):** no arm beats control. **Full 150-mixture DNSMOS verdict
+  (§4.2, added in the follow-up session):** `lr_sched`'s *best* checkpoint robustly beats
+  control on every metric (SIG/BAK/OVRL/SI-SDR/STOI, all sub-material) — the opposite of
+  what the final-step proxy suggested, because checkpoint selection (best-val vs final-step)
+  changes the ranking. `preserve` makes exactly the SIG-for-BAK trade it was designed to
+  make (+0.0075 SIG, −0.0113 BAK, both robust) but an order of magnitude too small to close
+  the −0.02 to −0.03 SIG regression RQ3 found. `snr_curriculum` is neutral. No material win
+  for any arm in 18k steps on this data build.
 - **Inference opt (done, measured):** **BatchNorm folding** into preceding convs — opt-in
   `-DULUNAS_BN_FOLDED`, numerically parity-safe (1.04e-7 spectral / 6.68e-6 PCM vs reference),
   **−6.65 % x86 hop latency**. x86-host only, *not* an ARM/iPhone number. See
@@ -135,10 +142,57 @@ the schedule did not help convergence within this budget.
 ### 4.2 Perceptual verdict — reduced DNSMOS eval (150 paired test mixtures)
 
 DNSMOS P.835 SIG/BAK/OVRL + SI-SDR + STOI, same 150 deterministic robot-proxy test
-mixtures for every condition (paired). This is the metric that tests the `preserve`
-hypothesis. WER (wav2vec2) skipped for the time window — noted as follow-up.
+mixtures for every arm (paired), each arm's **`_best.tar`** checkpoint (selected by
+validation SE-loss during training, per §3). WER (wav2vec2) skipped for the time
+window — noted as follow-up. Script: `SEtrain_adapted/eval_arms_dnsmos.py`, full
+per-utterance output in `evaluation/eval_arms_dnsmos_results.json`.
 
-_(pending — populated by `eval_arms_dnsmos.py`.)_
+| Arm | SIG | BAK | OVRL | SI-SDR (dB) | STOI |
+|---|---|---|---|---|---|
+| arm_control | 3.145 | 3.913 | 2.867 | 17.589 | 0.9314 |
+| arm_lr_sched | 3.155 | 3.929 | 2.881 | 17.803 | 0.9326 |
+| arm_preserve | 3.153 | 3.902 | 2.869 | 17.593 | 0.9325 |
+| arm_snr_curriculum | 3.146 | 3.915 | 2.869 | 17.589 | 0.9316 |
+
+**Paired bootstrap CI95% (Δ = arm − control, n=150, 2000 resamples), materiality
+threshold |ΔSIG|/|ΔOVRL| > 0.03 per the project's own established convention
+(`EXPERIMENT_REPORT.md`):**
+
+| Arm | ΔSIG | ΔBAK | ΔOVRL | ΔSI-SDR | ΔSTOI |
+|---|---|---|---|---|---|
+| lr_sched | +0.0098 [+0.0011,+0.0188] ✅robust | +0.0152 [+0.0075,+0.0238] ✅robust | +0.0141 [+0.0064,+0.0224] ✅robust | +0.214dB [+0.148,+0.291] ✅robust | +0.0012 [+0.0007,+0.0018] ✅robust |
+| preserve | +0.0075 [+0.0024,+0.0132] ✅robust | **−0.0113 [−0.0159,−0.0068]** ✅robust(worse) | +0.0016 [−0.0027,+0.0062] not robust | +0.0042 [−0.0282,+0.0388] not robust | +0.0011 [+0.0008,+0.0014] ✅robust |
+| snr_curriculum | +0.0011 [−0.0020,+0.0043] not robust | +0.0015 [−0.0017,+0.0045] not robust | +0.0018 [−0.0010,+0.0046] not robust | −0.0005 [−0.0289,+0.0298] not robust | +0.0002 [+0.0001,+0.0004] ✅robust(trivial) |
+
+All deltas above are **statistically robust but sub-material** (< 0.03 DNSMOS) — none
+would clear this project's own pre-registered materiality bar. Reading each arm honestly:
+
+- **`preserve` hypothesis is directionally confirmed, but too small to matter.** SIG
+  improves (+0.0075, robust) with a BAK cost (−0.0113, robust) — exactly the SIG-for-BAK
+  trade the speech-preservation loss was designed to make (§3). But the magnitude is an
+  order smaller than what needs fixing: RQ3's own QC found `F_PROXY_ROBOT` vs `F_GENERIC`
+  SIG regression of −0.021 to −0.034 (worst cases down to −0.34 to −0.97, `QC_FAILURE_ANALYSIS.md`
+  §4). A weight-20 preservation penalty nudges SIG back by +0.0075 — real, but nowhere near
+  enough to close that gap. OVRL is a wash (CI crosses 0): the SIG gain and BAK loss roughly
+  cancel in the composite score.
+- **`lr_sched` actually wins on every metric here — the opposite of §4.1's read.** The
+  fast SI-SDR proxy in §4.1 compared *final-step* (18k) validation numbers on a 9-item
+  val set and found `lr_sched` slightly behind control. This full 150-item test-set eval
+  uses each arm's **best-validation checkpoint**, not the final step — and `lr_sched`'s
+  best checkpoint (likely earlier than step 18000, since its LR has already decayed by
+  then) generalizes better: robust gains on SIG/BAK/OVRL/SI-SDR/STOI, all still sub-material
+  but consistently positive. **Lesson for next time:** a fast same-step proxy and a
+  best-checkpoint full eval are not measuring the same thing — checkpoint selection matters
+  more than the 18k-step endpoint comparison suggested.
+- **`snr_curriculum` is confirmed neutral.** Every CI crosses (or nearly crosses) zero —
+  no detectable effect from the easy→hard SNR schedule at this step budget, consistent
+  with the §4.1 SI-SDR tie.
+
+**Overall verdict for the sweep:** no arm produces a material win over `control` in 18k
+steps on this (reduced, single-session) data build. `lr_sched` is the best all-around
+candidate for a longer run (robust, uniformly positive, cheap to keep). `preserve` is the
+right *mechanism* for the SIG regression but needs a substantially higher penalty weight
+(or more steps) to reach material size — a natural next ablation, not a dead end.
 
 ---
 
@@ -201,4 +255,13 @@ python3 SEtrain_adapted/compare_arms.py            # ranked proxy-metric table
 7. **Proxy metrics for fast screens, full metrics for verdicts:** DNSMOS/WER eval is CPU-bound
    and slow; validation SE-loss + SI-SDR gives a same-window directional signal, with the
    perceptual verdict deferred — but note SE-loss won't fully capture the SIG effect the
-   `preserve` arm targets, so treat its screen as necessary-not-sufficient.
+   `preserve` arm targets, so treat its screen as necessary-not-sufficient. **Confirmed by
+   §4.2:** the full DNSMOS eval flipped `lr_sched`'s ranking relative to the fast proxy,
+   because the proxy compared final-step (18k) validation numbers while the full eval used
+   each arm's best-validation checkpoint — a different point in training. When a proxy and
+   a full eval disagree, check whether they're even scoring the same checkpoint before
+   trusting either.
+8. **A mechanism can be real and still not material.** `preserve`'s SIG-for-BAK trade
+   showed up exactly as designed (both deltas robust/CI-excludes-0) but at 1/3 the size of
+   the regression it was meant to fix. Confirming a mechanism direction is not the same as
+   confirming it's big enough to ship — report the ratio, not just the sign.
