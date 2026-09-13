@@ -109,9 +109,13 @@ b9c0621e91e1094a2e366f53228fb2b24340f00dba19a32bdfe34b0b22d494e8  F_GENERIC_ASR.
 0f9f23f7c752c5139cddfc38bc3dae57de56d33f49c10dc0e4a403801ec6ded4  F_PROXY_ROBOT_ASR_best.tar
 5c23c0ba63fe01ba9180674431e60a8d62398de5cf1e3607ac7329edf5bfe10c  F_PROXY_ROBOT_LOWSUP.tar
 894b29ca0277e5d80ed853d91c6e518fd7e556028b683f7d1a9057fbac8e019b  F_PROXY_ROBOT_LOWSUP_best.tar
+2e575697f5292575da89767d70daf31c899490580dda26b4f679ac74351e9863  F_PROXY_ROBOT_LOWSISNR.tar
+76573cc974a37556eebbeb7d208ac35b6d1fb1e241060f8b955477408bca4863  F_PROXY_ROBOT_LOWSISNR_best.tar
 ```
 
 `F_PROXY_ROBOT_LOWSUP`: reduced-suppression ablation (`lamda_mag` 70→35), see `QC_FAILURE_ANALYSIS.md` §4.3c — real negative result, not an improvement.
+
+`F_PROXY_ROBOT_LOWSISNR`: reduced SI-SNR-weight ablation (`lamda_sisnr` 1.0→0.3, `lamda_ri`/`lamda_mag` back to 30/70), see `QC_FAILURE_ANALYSIS.md` §4.3d — small but statistically robust joint SIG/BAK/OVRL improvement, more pronounced in the UAV-motor_high+fan tradeoff subset; still sub-material (<0.03 DNSMOS), WER not robustly changed.
 
 These are the exact checkpoints produced and uploaded in this session (computed via `sha256sum`, not re-derived) — training is not bit-exact-reproducible run-to-run (GPU float non-determinism, unseeded `DataLoader` workers), so a fresh training run will produce *equivalent* but not *hash-identical* checkpoints. Use these hashes only to verify you have the exact same uploaded files, not to validate a fresh retrain.
 

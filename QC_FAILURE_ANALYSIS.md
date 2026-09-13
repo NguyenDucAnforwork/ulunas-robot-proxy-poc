@@ -114,6 +114,23 @@ Hypothesis: `HybridLoss`'s magnitude-matching term (`lamda_mag=70`, dominant wei
 
 **Bottom line: the SIG-BAK tradeoff remains unresolved after two real attempts** (observation-adding in §4.3b, and this loss-reweighting retrain). Both are documented negative results, not swept under the rug.
 
+### 4.3d Retrain with reduced SI-SNR weight (`lamda_sisnr` 1.0→0.3) — real positive result, but small
+
+Follow-up to §4.3c's hypothesis: added an explicit `lamda_sisnr` weight to `HybridLoss` (backward-compatible default=1.0, see `loss_factory.py`), trained `F_PROXY_ROBOT_LOWSISNR` — single-variable change vs `F_PROXY_ROBOT` (`lamda_sisnr` 1.0→0.3, `lamda_ri`/`lamda_mag` back to the original 30/70, reverting §4.3c's failed change) — compared on the same 563-utterance test set, paired bootstrap CI.
+
+| Metric | Δ (LOWSISNR − original), overall | Δ, tradeoff subset (UAV `motor_high` + fan, n=207) |
+|---|---|---|
+| SIG | **+0.0059** [0.0035,0.0083] (better, robust) | **+0.0143** [0.0090,0.0200] (better, robust — **larger effect exactly where the problem concentrates**) |
+| BAK | +0.0078 [0.0057,0.0099] (better, robust) | +0.0095 [0.0058,0.0134] (better, robust) |
+| OVRL | +0.0077 (better, robust) | +0.0145 (better, robust) |
+| SI-SDR | -0.0248 dB (CI barely crosses 0, not quite robust) | **+0.0499 dB** [0.0222,0.0798] (better, robust) |
+| STOI | ~0 (tiny, robust negative but negligible) | ~0 (CI crosses zero) |
+| WER | -0.0012 (slightly better, CI crosses zero, not robust) | -0.0018 (slightly better, CI crosses zero, not robust) |
+
+**This is the first real, correctly-directed result across the three mitigation attempts (observation-adding §4.3b, `lamda_mag` reduction §4.3c, this one).** Unlike §4.3c, **SIG, BAK, and OVRL all improve together** — not a tradeoff, a genuine (if small) joint improvement — and critically, **the SIG improvement is more than double in the exact tradeoff subset than overall** (+0.0143 vs +0.0059), i.e. the effect concentrates where the problem was originally found, exactly the pattern a real fix should show. SI-SDR improves specifically and robustly in the tradeoff subset (+0.05dB). This supports the hypothesis that the SI-SNR term's relative gradient weight, not the magnitude-matching term, was the more relevant lever for over-suppression in this architecture.
+
+**Honest caveat on magnitude**: every effect above is well below the 0.03 DNSMOS materiality threshold — this is a real, statistically robust, correctly-directed improvement, not a solved problem. WER does not robustly improve (CI crosses zero both overall and in the subset), so this specific change has not yet been shown to help intelligibility, only perceptual quality metrics. A natural next step (not yet run) would be pushing `lamda_sisnr` lower still (e.g. 0.1) to test whether the effect is monotonic and grows, or whether it plateaus/reverses.
+
 ### 4.4 What was NOT done (honest gaps)
 
 - No counterfactual/matched-pair tests (brief §6's "giữ speech, thay noise" etc.) were run — the analysis above is drawn from the natural variation in the random test set, not controlled swaps. This is a real limitation: the SIG-BAK tradeoff finding in §4.2 is evidence-based correlation with a plausible mechanism, explicitly not elevated to "proven causation."
