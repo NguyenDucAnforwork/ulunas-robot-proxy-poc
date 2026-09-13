@@ -1,0 +1,2 @@
+[F_PROXY_ROBOT_LOWSISNR] config_hash=f30817d849da9629 speech_manifest_hash=29b3277c8f498345 noise_manifest_hash=f99e67736c07fa44
+[F_PROXY_ROBOT_LOWSISNR] step 1/18000 loss_total=1.4331 loss_se=1.4331  elapsed=0.9s

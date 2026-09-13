@@ -11,7 +11,12 @@ class HybridLoss(nn.Module):
         compress_factor=0.3,
         eps=1e-12,
         lamda_ri=30,
-        lamda_mag=70):
+        lamda_mag=70,
+        lamda_sisnr=1.0):
+        # lamda_sisnr defaults to 1.0, matching the original hardcoded "+ sisnr" behavior
+        # exactly -- any existing/future call site that doesn't pass this argument behaves
+        # identically to before this parameter was added (M1's F_GENERIC/F_GENERIC_ASR and
+        # the original F_PROXY_ROBOT/F_PROXY_ROBOT_ASR runs are unaffected).
         super().__init__()
         self.n_fft = n_fft
         self.hop_len = hop_len
@@ -21,6 +26,7 @@ class HybridLoss(nn.Module):
         self.eps = eps
         self.lamda_ri = lamda_ri
         self.lamda_mag = lamda_mag
+        self.lamda_sisnr = lamda_sisnr
 
     def forward(self, y_pred, y_true):
         assert y_pred.shape == y_true.shape
@@ -48,7 +54,7 @@ class HybridLoss(nn.Module):
             self.eps
         ).mean()
         
-        return self.lamda_ri*(real_loss + imag_loss) + self.lamda_mag*mag_loss + sisnr
+        return self.lamda_ri*(real_loss + imag_loss) + self.lamda_mag*mag_loss + self.lamda_sisnr*sisnr
 
 
 class STFTLoss(nn.Module):
