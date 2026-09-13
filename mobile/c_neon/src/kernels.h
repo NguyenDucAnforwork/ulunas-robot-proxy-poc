@@ -98,11 +98,17 @@ static inline void convtranspose2d_causal_1frame(
  * affine transform: y = (x - running_mean) / sqrt(running_var + eps) * weight + bias ---- */
 static inline void batchnorm_apply(float* x, int C, int F, const float* weight, const float* bias,
                                     const float* running_mean, const float* running_var, float eps) {
+#ifdef ULUNAS_BN_FOLDED
+    /* All 22 preceding convolutions already contain this affine, including pconv2. */
+    (void)x; (void)C; (void)F; (void)weight; (void)bias;
+    (void)running_mean; (void)running_var; (void)eps;
+#else
     for (int c = 0; c < C; ++c) {
         float scale = weight[c] / sqrtf(running_var[c] + eps);
         float shift = bias[c] - running_mean[c] * scale;
         for (int f = 0; f < F; ++f) x[c * F + f] = x[c * F + f] * scale + shift;
     }
+#endif
 }
 
 /* ---- AffinePReLU: y = affine_w*x + affine_b + PReLU(x, slope) ---- (see ulunas.py::AffinePReLU) */

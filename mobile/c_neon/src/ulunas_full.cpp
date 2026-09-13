@@ -13,7 +13,14 @@
 #include "fft.h"
 #include "kernels.h"
 #include "ulunas_full.h"
+#ifdef ULUNAS_BN_FOLDED
+#include "../generated/ulunas_weights_folded.h"
+#ifndef ULUNAS_WEIGHTS_BN_FOLDED
+#error "Regenerate folded weights with export_weights.py --fold-bn"
+#endif
+#else
 #include "../generated/ulunas_weights.h"
+#endif
 
 #define FREQ 257
 #define ERB_LOW 65
