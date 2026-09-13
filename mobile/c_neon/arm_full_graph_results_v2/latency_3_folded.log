@@ -1,0 +1,9 @@
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.68481 p50_ms=0.68098 p95_ms=0.70638 p99_ms=0.72364 max_ms=0.87419
+RTF_mean=0.04280 RTF_p95=0.04415
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***

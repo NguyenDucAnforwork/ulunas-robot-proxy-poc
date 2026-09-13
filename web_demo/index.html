@@ -15,11 +15,13 @@
 <h1>UL-UNAS -- WASM Fallback Demo</h1>
 
 <div class="bad">
-  <strong>This is NOT a native-performance demo.</strong> It runs the streaming STFT/ISTFT
-  DSP core compiled to WebAssembly, in a browser, as a fallback for when no Mac/Xcode/physical
-  iPhone is available to build the real iOS app (see <code>IOS_BUILD_AND_DEMO.md</code>). It
-  does <strong>not</strong> demonstrate native ARM64/NEON performance, and it does
-  <strong>not yet include the actual noise-suppression model</strong> -- see the note below.
+  <strong>This is NOT a native-performance demo.</strong> It runs the real UL-UNAS model
+  (runtime-free C engine + real trained <code>F_PROXY_ROBOT</code> weights) compiled to
+  WebAssembly, in a browser, as a fallback for when no Mac/Xcode/physical iPhone is available
+  to build the real iOS app (see <code>IOS_BUILD_AND_DEMO.md</code>). It does
+  <strong>not</strong> demonstrate native ARM64/NEON performance (WASM has no NEON), and it
+  has <strong>never been run in an actual browser</strong> -- only Node.js-verified, see the
+  note below.
 </div>
 
 <div class="warn">
@@ -28,11 +30,15 @@
 </div>
 
 <div class="warn" id="modelNote">
-  <strong>Model status:</strong> this build runs the real, validated STFT &rarr; overlap-add
-  ISTFT streaming pipeline with an <em>identity passthrough</em> in place of the noise-suppression
-  model (the runtime-free C model implementation was still being completed in a concurrent
-  workstream at the time this demo was built -- see <code>ulunas_wasm.cpp</code>). You will hear
-  your own voice with the DSP framing latency applied, not noise suppression yet.
+  <strong>Model status:</strong> this build runs the real noise-suppression model (same
+  runtime-free C engine validated in <code>mobile/c_neon/</code>, real <code>F_PROXY_ROBOT</code>
+  trained weights) -- not a passthrough. It is verified against a native-x86 build of the
+  identical source on the same input, in Node.js (<code>test_wasm_node.js</code>): outputs
+  match to within ~0.025 after the model's own documented 2-hop startup transient (that
+  transient itself diverges much more between native and WASM builds -- a real, measured
+  cross-compiler floating-point sensitivity in that specific warm-up window, not a bug in
+  either build individually -- see that file's comments). It has never been exercised with a
+  real microphone in a real browser.
 </div>
 
 <button id="startBtn">Start</button>

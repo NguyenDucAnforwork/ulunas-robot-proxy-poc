@@ -1,0 +1,81 @@
+BOOT_START Sun Sep 13 15:35:40 UTC 2026
+Linux ip-172-31-24-108.ap-southeast-2.compute.internal 6.18.44-99.149.amzn2023.aarch64 #2 SMP Tue Aug 25 21:16:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+g++ (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5)
+-rw-r--r--. 1 root root 1752400 Sep 13 15:36 c_neon_full.tar.gz
+STFT full graph: 20 frames, max_abs_error=1.25169754e-06 (limit=1e-4)
+PCM full pipeline: 20 frames, max_abs_error=1.931190491e-05 (limit=1e-4)
+BN fold parity: PASS
+silence (200 hops): PASS (all finite)
+impulse (50 hops): PASS (all finite)
+random noise (500 hops, ~8s): PASS (all finite)
+reset-then-reprocess determinism: max_diff=0.0000000000 PASS (bit-exact)
+
+=== EDGE CASES: ALL PASS ===
+silence (200 hops): PASS (all finite)
+impulse (50 hops): PASS (all finite)
+random noise (500 hops, ~8s): PASS (all finite)
+reset-then-reprocess determinism: max_diff=0.0000000000 PASS (bit-exact)
+
+=== EDGE CASES: ALL PASS ===
+== pair 1: reference (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.69936 p50_ms=0.69791 p95_ms=0.71148 p99_ms=0.71729 max_ms=0.75756
+RTF_mean=0.04371 RTF_p95=0.04447
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+== pair 1: folded (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.68122 p50_ms=0.67939 p95_ms=0.69159 p99_ms=0.70349 max_ms=1.00256
+RTF_mean=0.04258 RTF_p95=0.04322
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+== pair 2: folded (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.68278 p50_ms=0.67972 p95_ms=0.69553 p99_ms=0.70376 max_ms=1.85738
+RTF_mean=0.04267 RTF_p95=0.04347
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+== pair 2: reference (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.70155 p50_ms=0.69869 p95_ms=0.71689 p99_ms=0.72972 max_ms=0.85604
+RTF_mean=0.04385 RTF_p95=0.04481
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+== pair 3: reference (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.70025 p50_ms=0.69842 p95_ms=0.71153 p99_ms=0.72546 max_ms=0.88369
+RTF_mean=0.04377 RTF_p95=0.04447
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+== pair 3: folded (REAL ARM Graviton2/Neoverse-N1, F_PROXY_ROBOT weights) ==
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.68481 p50_ms=0.68098 p95_ms=0.70638 p99_ms=0.72364 max_ms=0.87419
+RTF_mean=0.04280 RTF_p95=0.04415
+real_time_capable(RTF_mean<1)=yes
+
+*** CAVEAT: this number reflects whatever machine ran this binary (see argv[0]
+*** and how it was invoked -- x86 host directly, or qemu-aarch64-static emulating
+*** ARM64). It is NOT a measurement of real Cortex-A53/Apple-A13 silicon. See
+*** MOBILE_BENCHMARK.md for what is and isn't a real-hardware number. ***
+=== ALL_BENCHMARKS_DONE ===
+tar: Removing leading `/' from member names

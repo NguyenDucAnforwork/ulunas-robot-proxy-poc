@@ -5,6 +5,20 @@ passes the self-contained parity checks and reduces measured x86 mean hop latenc
 by **6.65%** (0.06266 ms/hop). Default inference and `build_and_test.sh` remain unfused.
 No commits were made; all task changes are under `mobile/c_neon/`.
 
+> **Correction (follow-up session, 2026-09-13):** the checkpoint used below,
+> `F_GENERIC.tar`, is M1's *generic*-domain fine-tune, not `F_PROXY_ROBOT.tar` — the
+> actual robot-proxy-adapted checkpoint this whole project targets. `export_weights.py`
+> now takes an explicit `--checkpoint` argument (previously hardcoded) specifically
+> because this mislabel was caught and needed fixing. Re-running the identical protocol
+> against the correct `F_PROXY_ROBOT.tar` (SHA-256 `70c2a7d2...4a163`, verified against
+> `REPRODUCTION.md`) gives: **parity 2.47e-6 spectral / 9.30e-6 PCM** (both still ≪1e-4),
+> **x86 latency −6.70%** (0.94203ms → 0.87892ms) — the same conclusion, confirming the
+> latency effect is architecture-driven (same graph shape) rather than an artifact of
+> which checkpoint's weights were loaded. The measurements below are left unmodified as
+> the historical record of what was actually measured that session; treat the numbers in
+> this correction note, not the ones below, as authoritative for `F_PROXY_ROBOT`. See
+> `ARM_FULL_GRAPH_RESULTS.md` for the equivalent real-ARM re-run.
+
 ## Implementation
 
 - `export_weights.py --fold-bn` writes `generated/ulunas_weights_folded.h` and
