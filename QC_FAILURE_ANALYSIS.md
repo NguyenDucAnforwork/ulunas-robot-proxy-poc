@@ -95,6 +95,25 @@ Ran the full alpha sweep (`output = (1-α)·enhanced + α·noisy`, α∈{0,0.05,
 
 **Conclusion: observation-adding does NOT solve the SIG-BAK tradeoff — it trades one axis for another, and does not fix intelligibility.** SIG does rise modestly in exactly the subset where it was damaged (+0.07 to +0.09 at α=0.1-0.2), confirming the mechanism (blending back original signal restores some perceived naturalness). But **BAK/OVRL fall faster than SIG rises at every α tested**, and — critically — **WER in the tradeoff subset never improves** at any α (flat at best, clearly worse at α=0.3). This means over-suppression is genuinely deleting speech content (not just making it sound unnatural), and blending back noisy signal cannot recover deleted phonetic information — it can only make the output sound more natural while the content damage remains. No α in the tested range dominates the α=0 baseline on every metric; this is reported as the real, unresolved negative result it is, not spun as a fix. (Point estimates only — no bootstrap CI computed for this supplementary sweep; the WER deltas at small α are likely within noise given the scale of the M1/robot-proxy CIs on comparably-sized deltas.)
 
+### 4.3c Retrain with reduced suppression (`lamda_mag` 70→35) — tested, does NOT help, likely wrong lever
+
+Hypothesis: `HybridLoss`'s magnitude-matching term (`lamda_mag=70`, dominant weight) forces the output to match clean magnitude too exactly in noise-dominant bins, driving over-suppression. Trained `F_PROXY_ROBOT_LOWSUP` — single-variable change (`lamda_mag` 70→35, everything else identical: same checkpoint/data/seed/steps as `F_PROXY_ROBOT`) — then compared on the same 563-utterance test set, paired bootstrap CI, overall and on the tradeoff subset (n=207).
+
+| Metric | Δ (LOWSUP − original), overall | Δ, tradeoff subset (UAV `motor_high` + fan) |
+|---|---|---|
+| SIG | **-0.0054** [-0.0081,-0.0027] (worse, robust) | **-0.0123** [-0.0180,-0.0066] (worse, robust) |
+| BAK | +0.0167 [0.0140,0.0196] (better, robust) | +0.0222 [0.0179,0.0267] (better, robust) |
+| OVRL | +0.0034 (robust, tiny) | ~0 (CI crosses zero) |
+| SI-SDR | -0.0039 dB (CI crosses zero, not robust) | **-0.0235 dB** [-0.0305,-0.0167] (worse, robust) |
+| STOI | -0.0017 (worse, robust, tiny) | -0.0026 (worse, robust, tiny) |
+| WER | **+0.0047** [0.0013,0.0086] (worse, robust) | +0.0075 [-0.0003,+0.0157] (worse, borderline) |
+
+**The hypothesis was wrong, or at least the specific lever was wrong.** Halving `lamda_mag` did not reduce suppression as expected — SIG got slightly *worse*, not better, and BAK got slightly *better* (more suppression, not less), in both the overall set and specifically in the tradeoff subset where the problem concentrates. All deltas are small (sub-material by the 0.03/1-point thresholds) but statistically real (most CIs exclude zero).
+
+**A plausible explanation for the follow-up, not yet tested**: `HybridLoss` sums `lamda_ri*(RI-loss) + lamda_mag*(mag-loss) + 1.0*(SI-SNR loss)` — the SI-SNR term's *absolute* weight was never touched, but reducing `lamda_mag` reduces the total loss magnitude, which *increases the SI-SNR term's relative share of the gradient*. If SI-SNR (which directly rewards maximizing signal-to-noise ratio) is actually the more aggressive-suppression-inducing term — plausible, since SI-SDR-style objectives are known in the SE literature to sometimes encourage over-suppression by rewarding aggressive zeroing of anything not well-correlated with clean — then reducing `lamda_mag` alone could inadvertently *increase* relative suppression pressure, consistent with what was observed. **This is a hypothesis for a follow-up experiment (e.g. adding an explicit, separately-tunable SI-SNR weight <1.0), not yet tested** — reported here as a lead, not a conclusion.
+
+**Bottom line: the SIG-BAK tradeoff remains unresolved after two real attempts** (observation-adding in §4.3b, and this loss-reweighting retrain). Both are documented negative results, not swept under the rug.
+
 ### 4.4 What was NOT done (honest gaps)
 
 - No counterfactual/matched-pair tests (brief §6's "giữ speech, thay noise" etc.) were run — the analysis above is drawn from the natural variation in the random test set, not controlled swaps. This is a real limitation: the SIG-BAK tradeoff finding in §4.2 is evidence-based correlation with a plausible mechanism, explicitly not elevated to "proven causation."

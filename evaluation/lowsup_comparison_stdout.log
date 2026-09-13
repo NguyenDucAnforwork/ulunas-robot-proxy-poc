@@ -1,0 +1,93 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/212 [00:00<?, ?it/s]Loading weights: 100%|██████████| 212/212 [00:00<00:00, 5521.46it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-base-960h
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  progress: 0/563
+  progress: 50/563
+  progress: 100/563
+  progress: 150/563
+  progress: 200/563
+  progress: 250/563
+  progress: 300/563
+  progress: 350/563
+  progress: 400/563
+  progress: 450/563
+  progress: 500/563
+  progress: 550/563
+{
+  "n": 563,
+  "tradeoff_subset_n": 207,
+  "ci_lowsup_vs_original_overall": {
+    "sig": {
+      "delta": -0.005371166643031611,
+      "ci95_lo": -0.008108479226227363,
+      "ci95_hi": -0.002721922062884331
+    },
+    "bak": {
+      "delta": 0.016705884489606415,
+      "ci95_lo": 0.013954655675300836,
+      "ci95_hi": 0.019649992320180474
+    },
+    "ovrl": {
+      "delta": 0.003442847447091335,
+      "ci95_lo": 0.0009040335340128842,
+      "ci95_hi": 0.006173358046737047
+    },
+    "sisdr": {
+      "delta": -0.003889507394065461,
+      "ci95_lo": -0.01207987117592649,
+      "ci95_hi": 0.004771567251182576
+    },
+    "stoi": {
+      "delta": -0.0016819652518279549,
+      "ci95_lo": -0.0018397903287935883,
+      "ci95_hi": -0.0015293061164566462
+    },
+    "per_utt_wer": {
+      "delta": 0.004704688149794939,
+      "ci95_lo": 0.0012984292440003853,
+      "ci95_hi": 0.00855090140049353
+    }
+  },
+  "ci_lowsup_vs_original_tradeoff_subset": {
+    "sig": {
+      "delta": -0.012342314364871765,
+      "ci95_lo": -0.017974088153091518,
+      "ci95_hi": -0.006556106461577097
+    },
+    "bak": {
+      "delta": 0.022234186213331064,
+      "ci95_lo": 0.017889132045538967,
+      "ci95_hi": 0.02673606279444485
+    },
+    "ovrl": {
+      "delta": -0.0004971430133391408,
+      "ci95_lo": -0.005886325952631428,
+      "ci95_hi": 0.004885800326681047
+    },
+    "sisdr": {
+      "delta": -0.02348296725807586,
+      "ci95_lo": -0.030519870492283274,
+      "ci95_hi": -0.016732118725056814
+    },
+    "stoi": {
+      "delta": -0.002559875642781595,
+      "ci95_lo": -0.002828731295274762,
+      "ci95_hi": -0.0022916227533901407
+    },
+    "per_utt_wer": {
+      "delta": 0.007505030152600872,
+      "ci95_lo": -0.00032247569107670857,
+      "ci95_hi": 0.015704208522284654
+    }
+  }
+}
+N0 {'sig_mean': 2.8186890430034848, 'bak_mean': 2.505789489812265, 'ovrl_mean': 2.2054895407680943, 'sisdr_mean': 5.251421120078973, 'stoi_mean': 0.8772054163845943, 'wer_mean': 0.1957417771035968, 'tradeoff_sig_mean': 2.3443037997094693, 'tradeoff_bak_mean': 1.9083601158047816, 'tradeoff_ovrl_mean': 1.7655795504462641, 'tradeoff_wer_mean': 0.34835317134800997}
+F_PROXY_ROBOT {'sig_mean': 3.1368955942150696, 'bak_mean': 3.951628986112902, 'ovrl_mean': 2.84202680383584, 'sisdr_mean': 15.353365707460982, 'stoi_mean': 0.9173613001599732, 'wer_mean': 0.08634897889008221, 'tradeoff_sig_mean': 2.839804450571642, 'tradeoff_bak_mean': 3.9063685115714932, 'tradeoff_ovrl_mean': 2.570639203209355, 'tradeoff_wer_mean': 0.12697352998410164}
+F_PROXY_ROBOT_LOWSUP {'sig_mean': 3.131524427572038, 'bak_mean': 3.9683348706025083, 'ovrl_mean': 2.845469651282931, 'sisdr_mean': 15.349476200066917, 'stoi_mean': 0.9156793349081452, 'wer_mean': 0.09105366703987715, 'tradeoff_sig_mean': 2.8274621362067704, 'tradeoff_bak_mean': 3.9286026977848243, 'tradeoff_ovrl_mean': 2.570142060196016, 'tradeoff_wer_mean': 0.1344785601367025}
+=== DONE ===
