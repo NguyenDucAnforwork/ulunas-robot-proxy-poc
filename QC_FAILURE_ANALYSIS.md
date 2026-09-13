@@ -131,6 +131,25 @@ Follow-up to §4.3c's hypothesis: added an explicit `lamda_sisnr` weight to `Hyb
 
 **Honest caveat on magnitude**: every effect above is well below the 0.03 DNSMOS materiality threshold — this is a real, statistically robust, correctly-directed improvement, not a solved problem. WER does not robustly improve (CI crosses zero both overall and in the subset), so this specific change has not yet been shown to help intelligibility, only perceptual quality metrics. A natural next step (not yet run) would be pushing `lamda_sisnr` lower still (e.g. 0.1) to test whether the effect is monotonic and grows, or whether it plateaus/reverses.
 
+### 4.3e Push further: `lamda_sisnr` 0.3→0.1 — effect continues linearly, but a real cost appears
+
+Direct follow-up to §4.3d, testing whether the improvement is monotonic/growing or plateaus/reverses: trained `F_PROXY_ROBOT_LOWSISNR2` (`lamda_sisnr`=0.1, `lamda_ri`/`lamda_mag` unchanged at 30/70), same manifest/seed/steps. Compared against both `F_PROXY_ROBOT` (original, `lamda_sisnr`=1.0) and `F_PROXY_ROBOT_LOWSISNR` (`lamda_sisnr`=0.3), paired bootstrap CI.
+
+| Metric | Δ vs original, overall | Δ vs original, tradeoff subset (n=207) | Δ vs LOWSISNR(0.3), overall | Δ vs LOWSISNR(0.3), tradeoff subset |
+|---|---|---|---|---|
+| SIG | +0.0119 [0.008,0.016] | **+0.0287** [0.020,0.038] (near the 0.03 materiality line) | +0.0060 [0.004,0.008] | +0.0144 [0.010,0.019] |
+| BAK | +0.0138 [0.011,0.017] | +0.0177 [0.013,0.023] | +0.0061 [0.004,0.008] | +0.0082 [0.005,0.011] |
+| OVRL | +0.0150 [0.011,0.019] | +0.0291 [0.021,0.037] | +0.0074 [0.005,0.010] | +0.0145 [0.010,0.019] |
+| SI-SDR | **-0.082dB** [-0.124,-0.035] (worse, robust) | +0.051dB (CI now crosses zero — no longer robust) | **-0.057dB** [-0.078,-0.035] (worse, robust) | +0.001dB (flat, not robust) |
+| WER | -0.0011 (not robust) | -0.0040 (not robust) | ~0 (not robust) | -0.0022 (not robust) |
+
+**Two things are now clear that weren't visible at `lamda_sisnr`=0.3:**
+
+1. **The SIG/BAK/OVRL improvement is monotonic and roughly additive per step** — going from 0.3→0.1 adds almost the same increment as 1.0→0.3 did. In the tradeoff subset, SIG is now at +0.0287, approaching (but still just under) the 0.03 DNSMOS materiality threshold. The effect has not plateaued yet.
+2. **A real cost has emerged: overall SI-SDR is now robustly *worse*** (-0.082dB vs original, CI does not cross zero), a monotonic decline that was not statistically visible at 0.3 (§4.3d's overall SI-SDR delta barely crossed zero) but is unambiguous at 0.1. This is the expected mechanism: reducing `lamda_sisnr` reduces how hard the model is optimized for waveform-level SI-SDR, trading it for perceptual quality (DNSMOS SIG/BAK/OVRL). The tradeoff-subset SI-SDR gain seen at 0.3 (+0.05dB, robust) has also flattened out at 0.1 (+0.001dB, no longer robust) — the SI-SDR benefit in the subset did not continue growing the way the DNSMOS metrics did.
+
+**Honest framing**: this is not a free win that keeps improving — it is a real dial between perceptual quality and waveform fidelity. Pushing `lamda_sisnr` lower keeps helping SIG/BAK/OVRL (and in the tradeoff subset, SIG is now close to material) but at a measurable, statistically robust cost to overall SI-SDR that did not show up at the more conservative 0.3 setting. WER remains unaffected either way (never statistically robust in either direction across all three configs tested). No single value tested so far is a clean, materially-better fix — each is a different point on this quality/fidelity dial, and the choice between them depends on which metric the deployment actually cares more about.
+
 ### 4.4 What was NOT done (honest gaps)
 
 - No counterfactual/matched-pair tests (brief §6's "giữ speech, thay noise" etc.) were run — the analysis above is drawn from the natural variation in the random test set, not controlled swaps. This is a real limitation: the SIG-BAK tradeoff finding in §4.2 is evidence-based correlation with a plausible mechanism, explicitly not elevated to "proven causation."
