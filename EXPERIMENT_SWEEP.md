@@ -220,8 +220,22 @@ removal costs 1443.78 ns/call on real ARM for the largest pointwise stage — a 
 number for what `BN_FOLD_RESULTS.md` could only show on x86. This is a synthetic
 per-primitive microbenchmark, not a full-graph hop-latency number (the real 4.7MB
 weight header couldn't fit through the only available data channel, EC2 user-data's
-16KB limit) — full-graph real-ARM RTF and the actual iPhone/Cortex-A53 target remain
-open, see that doc's "Next steps".
+16KB limit) — full-graph real-ARM RTF remained open at that point.
+
+**Second update (same follow-up session, S3 access granted):** with `s3:PutObject`/
+`GetObject` added to the IAM policy, shipped the real trained-checkpoint weights +
+full 697-node graph to a second Graviton2 instance via presigned S3 URLs (still no
+SSH) and ran the exact same `measure_bn_fold.sh` protocol used for the x86 numbers —
+see `mobile/c_neon/ARM_FULL_GRAPH_RESULTS.md`. Real full-graph parity (1.0e-7
+spectral / 2.4e-5 PCM) and edge cases all pass on real ARM. **Real ARM BN-fold hop
+latency: 0.710 → 0.685 ms, −3.55%** — smaller than the x86 host's −6.65%, which is
+the expected, honest outcome (different CPUs weight BN's cost differently relative to
+the surrounding conv/GRU work) rather than a discrepancy to explain away.
+**RTF_mean ≈ 0.044** on both builds — comfortably real-time-capable on a modest 2-vCPU
+cloud ARM core. Still open: the actual iPhone-11/Cortex-A53 target — Graviton2 is
+real ARM64/NEON silicon but server-class, architecturally distinct from the mobile
+target, so this closes the "no real-ARM number exists at all" gap without closing
+the device-specific `BLOCKED_EXTERNAL` items in `PROJECT_STATUS.md`.
 
 ---
 

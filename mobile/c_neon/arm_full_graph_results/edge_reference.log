@@ -1,0 +1,6 @@
+silence (200 hops): PASS (all finite)
+impulse (50 hops): PASS (all finite)
+random noise (500 hops, ~8s): PASS (all finite)
+reset-then-reprocess determinism: max_diff=0.0000000000 PASS (bit-exact)
+
+=== EDGE CASES: ALL PASS ===
