@@ -1,0 +1,3 @@
+n_frames=2000 hop_duration_ms=16.00
+mean_ms=0.91549 p50_ms=0.91476 p95_ms=0.93963 p99_ms=0.98020 max_ms=1.03001
+RTF_mean=0.05722 RTF_p95=0.05873

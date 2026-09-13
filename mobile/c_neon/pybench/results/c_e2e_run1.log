@@ -1,0 +1,3 @@
+n_hops=2000 hop_duration_ms=16.00
+mean_ms=0.93278 p50_ms=0.93256 p95_ms=0.95989 p99_ms=0.97376 max_ms=1.25471
+RTF_mean=0.05830 RTF_p95=0.05999

@@ -1,0 +1,23 @@
+=== END-TO-END (PCM) parity: C vs Python ===
+shape: (2000, 256)
+max_abs_error (all hops): 1.4901161193847656e-07
+rmse (all hops): 9.49358902602171e-09
+C has NaN/Inf: False
+Python has NaN/Inf: False
+  excluding first 0 hops: max_abs_error=1.490116e-07 rmse=9.493589e-09
+  excluding first 1 hops: max_abs_error=1.490116e-07 rmse=9.495960e-09
+  excluding first 2 hops: max_abs_error=1.490116e-07 rmse=9.498329e-09
+  excluding first 4 hops: max_abs_error=1.490116e-07 rmse=9.503077e-09
+  excluding first 8 hops: max_abs_error=1.490116e-07 rmse=9.512583e-09
+
+=== MODEL-ONLY (spectral frame) parity: C vs Python ===
+shape: (2000, 257, 2)
+max_abs_error (all frames): 8.381903171539307e-08
+rmse (all frames): 1.6898302757084593e-09
+C has NaN/Inf: False
+Python has NaN/Inf: False
+  excluding first 0 frames: max_abs_error=8.381903e-08 rmse=1.689830e-09
+  excluding first 1 frames: max_abs_error=8.381903e-08 rmse=1.689820e-09
+  excluding first 2 frames: max_abs_error=8.381903e-08 rmse=1.689893e-09
+  excluding first 4 frames: max_abs_error=8.381903e-08 rmse=1.689686e-09
+  excluding first 8 frames: max_abs_error=8.381903e-08 rmse=1.687716e-09

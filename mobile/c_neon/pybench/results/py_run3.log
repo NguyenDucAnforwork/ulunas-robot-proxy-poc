@@ -1,0 +1,6 @@
+[model-only] n=2000 hop_duration_ms=16.00
+[model-only] mean_ms=30.98939 p50_ms=30.81518 p95_ms=31.93393 p99_ms=32.80378 max_ms=40.33985
+[model-only] RTF_mean=1.93684 RTF_p95=1.99587
+[end-to-end] n=2000 hop_duration_ms=16.00
+[end-to-end] mean_ms=31.27574 p50_ms=31.02970 p95_ms=32.35099 p99_ms=33.31000 max_ms=37.77212
+[end-to-end] RTF_mean=1.95473 RTF_p95=2.02194
